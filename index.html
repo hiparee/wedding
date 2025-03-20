@@ -18,12 +18,56 @@
 
 
   <style>
-   @font-face {
-    font-family: 'GowunBatang-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+    .petals-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .petal {
+      position: absolute;
+      background-size: 100% 100%;
+      opacity: 0.8;
+      top: -10%;
+      pointer-events: none;
+      animation-name: falling;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-fill-mode: both;
+    }
+
+    .petal:nth-child(odd) {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C70,25 100,25 100,50 C100,75 70,100 50,100 C30,100 0,75 0,50 C0,25 30,0 50,0 Z' fill='%23ffccdd'/%3E%3C/svg%3E");
+    }
+
+    .petal:nth-child(even) {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C70,25 100,25 100,50 C100,75 70,100 50,100 C30,100 0,75 0,50 C0,25 30,0 50,0 Z' fill='%23fadcf1'/%3E%3C/svg%3E");
+    }
+
+    @keyframes falling {
+      0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+      }
+
+      100% {
+        top: 100%;
+        transform: translateX(calc(var(--random-x) * 1px)) rotate(calc(var(--random-rotate) * 1deg));
+      }
+    }
+
+    @font-face {
+      font-family: 'GowunBatang-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     /* 기본 스타일 */
     * {
       margin: 0;
@@ -38,8 +82,9 @@
       background-color: #fff;
     }
 
-    html, body {
-      width:100%;
+    html,
+    body {
+      width: 100%;
       height: 100%;
     }
 
@@ -59,7 +104,7 @@
     }
 
     .section-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       margin-bottom: 40px;
       color: var(--dark-color);
       position: relative;
@@ -92,7 +137,7 @@
       /* background-color: rgba(255, 255, 255, 0.8); */
       padding: 15px 25px;
       border-radius: 30px;
-      font-size: 1.52rem;
+      font-size: 1.5rem;
       color: var(--dark-color);
       /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); */
       z-index: 2;
@@ -108,13 +153,13 @@
     }
 
     .couple-names {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin: 20px 0;
       color: var(--dark-color);
     }
 
     .venue {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--accent-color);
     }
 
@@ -125,7 +170,7 @@
 
     .invitation-text {
       font-size: 1.1rem;
-      line-height: 1.8;
+      line-height: 1.5;
       margin-bottom: 40px;
       color: #666;
     }
@@ -160,7 +205,7 @@
     }
 
     .wedding-date {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       margin-bottom: 30px;
       color: var(--dark-color);
     }
@@ -552,16 +597,19 @@
     }
 
     .close-modal .fa-times {
-      color:#555555;
+      color: #555555;
     }
-
   </style>
 </head>
 
 <body>
+  <!-- 꽃잎 효과를 위한 div -->
+  <div class="petals-container"></div>
+
+
   <!-- 헤더 섹션 - 메인 이미지 및 기본 정보 -->
   <section id="header">
-    <div class="date-badge">2025 / 11 / 22 <br/>Saturday</div>
+    <div class="date-badge">2025 / 11 / 22 <br />Saturday</div>
     <img src="./images/01.jpg" alt="메인 웨딩 이미지" class="main-image" />
     <h1 class="couple-names">서희원<span style="margin: 15px;">·</span>우윤하</h1>
     <p class="venue">2025년 11월 22일 토요일 오후 2시 30분<br />파라다이스웨딩컨벤션 2층 스텔라홀
@@ -1155,6 +1203,49 @@
       }, 3000);
     }
 
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const petalsContainer = document.querySelector('.petals-container');
+      const numPetals = 25; // 꽃잎 개수
+
+      // 꽃잎 생성 함수
+      function createPetals() {
+        for (let i = 0; i < numPetals; i++) {
+          const petal = document.createElement('div');
+          petal.classList.add('petal');
+
+          // 랜덤 크기 (15px ~ 30px)
+          // const size = Math.floor(Math.random() * 15) + 15;
+          const size = Math.floor(Math.random() * 8) + 8; 
+          petal.style.width = `${size}px`;
+          petal.style.height = `${size}px`;
+
+          // 랜덤 초기 위치
+          const startPositionX = Math.random() * 100;
+          petal.style.left = `${startPositionX}%`;
+
+          // 랜덤 속도 (10초 ~ 25초)
+          const duration = Math.random() * 15 + 10;
+          petal.style.animationDuration = `${duration}s`;
+
+          // 랜덤 지연 시간 (0초 ~ 10초)
+          const delay = Math.random() * 10;
+          petal.style.animationDelay = `${delay}s`;
+
+          // 랜덤 이동 및 회전 값 설정
+          const randomX = Math.random() * 200 - 100; // -100 ~ 100
+          const randomRotate = Math.random() * 360; // 0 ~ 360
+          petal.style.setProperty('--random-x', randomX);
+          petal.style.setProperty('--random-rotate', randomRotate);
+
+          petalsContainer.appendChild(petal);
+        }
+      }
+
+      // 꽃잎 생성 호출
+      createPetals();
+    });
   </script>
 </body>
 
