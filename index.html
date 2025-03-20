@@ -38,9 +38,14 @@
       background-color: #fff;
     }
 
+    html, body {
+      width:100%;
+      height: 100%;
+    }
+
     /* 색상 변수 정의 (파스텔톤) */
     :root {
-      --primary-color: #894120;
+      --primary-color: #ac8678;
       --secondary-color: #e6b8a2;
       --accent-color: #c39380;
       --light-color: #fdf6f0;
@@ -84,10 +89,6 @@
     }
 
     .date-badge {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
       /* background-color: rgba(255, 255, 255, 0.8); */
       padding: 15px 25px;
       border-radius: 30px;
@@ -192,7 +193,7 @@
     }
 
     .calendar-day {
-      padding: 10px;
+
       font-size: 0.9rem;
       border-radius: 50%;
       aspect-ratio: 1/1;
@@ -509,7 +510,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #f5ead2;
+      /* background-color: #ffffff; */
     }
 
     .swiper-slide img {
@@ -525,7 +526,7 @@
     /* 알림 토스트 */
     .toast {
       position: fixed;
-      bottom: -60px;
+      bottom: -260px;
       left: 50%;
       transform: translateX(-50%);
       background-color: var(--dark-color);
@@ -549,6 +550,11 @@
       text-align: center;
       font-size: 0.9rem;
     }
+
+    .close-modal .fa-times {
+      color:#555555;
+    }
+
   </style>
 </head>
 
@@ -707,7 +713,7 @@
 
   <!-- 푸터 섹션 -->
   <footer>
-    <p>&copy; 2025 모바일 청첩장</p>
+    <p>&copy; 2025 made by hw.seo</p>
   </footer>
 
   <!-- 연락처 모달 -->
@@ -822,11 +828,11 @@
         './images/01.jpg',
         './images/02.jpg',
         './images/03.jpg',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
+        './images/ss.jpg',
+        './images/01.jpg',
+        './images/02.jpg',
+        './images/03.jpg',
+        './images/ss.jpg',
       ];
 
       // 달력 생성
@@ -900,11 +906,11 @@
         './images/01.jpg',
         './images/02.jpg',
         './images/03.jpg',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
-        '/api/placeholder/400/320',
+        './images/ss.jpg',
+        './images/01.jpg',
+        './images/02.jpg',
+        './images/03.jpg',
+        './images/ss.jpg',
       ];
 
       // 갤러리 아이템 추가
@@ -996,11 +1002,11 @@
       // D-day 텍스트 업데이트
       const countdownText = document.getElementById('countdown-text');
       if (diffDays > 0) {
-        countdownText.textContent = `희원·윤하의 결혼식이 ${diffDays}일 남았습니다`;
+        countdownText.textContent = `희원♥윤하의 결혼식이 ${diffDays}일 남았습니다`;
       } else if (diffDays === 0) {
-        countdownText.textContent = '오늘이 신랑이름, 신부이름의 결혼식입니다';
+        countdownText.textContent = '오늘이 희원♥윤하의 결혼식입니다';
       } else {
-        countdownText.textContent = `신랑이름, 신부이름의 결혼식이 ${Math.abs(diffDays)}일 지났습니다`;
+        countdownText.textContent = `희원♥윤하의 결혼식이 ${Math.abs(diffDays)}일 지났습니다`;
       }
     }
 
