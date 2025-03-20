@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모바일 청첩장</title>
+
+  <!-- 폰트어썸 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Swiper 슬라이더 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+
+
+  <style>
+   @font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+    /* 기본 스타일 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'GowunBatang-Regular', sans-serif;
+      color: #555;
+      line-height: 1.6;
+      background-color: #fff;
+    }
+
+    /* 색상 변수 정의 (파스텔톤) */
+    :root {
+      --primary-color: #894120;
+      --secondary-color: #e6b8a2;
+      --accent-color: #c39380;
+      --light-color: #fdf6f0;
+      --dark-color: #9d8189;
+    }
+
+    /* 섹션 공통 스타일 */
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 40px;
+      color: var(--dark-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+      bottom: -10px;
+      left: 0;
+    }
+
+    /* 헤더 섹션 */
+    #header {
+      height: 100vh;
+      background-color: var(--light-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 0;
+    }
+
+    .date-badge {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      /* background-color: rgba(255, 255, 255, 0.8); */
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-size: 1.52rem;
+      color: var(--dark-color);
+      /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); */
+      z-index: 2;
+    }
+
+    .main-image {
+      width: 90%;
+      height: 50vh;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+    }
+
+    .couple-names {
+      font-size: 1.3rem;
+      margin: 20px 0;
+      color: var(--dark-color);
+    }
+
+    .venue {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+    }
+
+    /* 초대말 섹션 */
+    #invitation {
+      background-color: #fff;
+    }
+
+    .invitation-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      color: #666;
+    }
+
+    .parents-info {
+      margin: 30px 0;
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--primary-color);
+      color: #fff;
+      border-radius: 30px;
+      font-size: 1rem;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-btn:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    /* 날짜 섹션 */
+    #wedding-day {
+      background-color: var(--light-color);
+    }
+
+    .wedding-date {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      color: var(--dark-color);
+    }
+
+    .calendar {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .calendar-month {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--dark-color);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+
+    .calendar-day {
+      padding: 10px;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-header-day {
+      font-weight: bold;
+      color: var(--dark-color);
+    }
+
+    .calendar-day.weekend {
+      color: var(--accent-color);
+    }
+
+    .calendar-day.wedding-day {
+      background-color: var(--primary-color);
+      color: #fff;
+      font-weight: bold;
+      transform: scale(1.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .countdown {
+      font-size: 1.2rem;
+      color: var(--dark-color);
+      margin-top: 20px;
+    }
+
+    /* 갤러리 섹션 */
+    #gallery {
+      background-color: #fff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.05);
+    }
+
+    /* 오시는 길 섹션 */
+    #location {
+      background-color: var(--light-color);
+    }
+
+    .map-container {
+      height: 300px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .venue-address {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .call-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: #fff;
+      border-radius: 30px;
+      font-size: 1rem;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .call-btn:hover {
+      background-color: var(--accent-color);
+    }
+
+    /* 마음 전하실 곳 섹션 */
+    #gifts {
+      background-color: #fff;
+    }
+
+    .accordion {
+      margin-top: 30px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .accordion-header {
+      padding: 15px 20px;
+      background-color: var(--primary-color);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-header:hover {
+      background-color: var(--accent-color);
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: #fff;
+    }
+
+    .accordion-inner {
+      padding: 20px;
+    }
+
+    .account-info {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .account-info:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .account-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--dark-color);
+    }
+
+    /* 공유하기 섹션 */
+    #share {
+      background-color: var(--light-color);
+      padding-bottom: 80px;
+    }
+
+    .share-btns {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .share-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .share-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      color: #fff;
+    }
+
+    .share-text {
+      font-size: 0.9rem;
+      color: var(--dark-color);
+    }
+
+    /* 모달 공통 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      border-radius: 15px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      color: #fff;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    /* 연락처 모달 */
+    #contact-modal .modal-content {
+      padding: 30px;
+      max-width: 350px;
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      color: var(--dark-color);
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-person {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .contact-person:last-child {
+      border-bottom: none;
+    }
+
+    .person-name {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .contact-action {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .call-action {
+      background-color: #4caf50;
+    }
+
+    .sms-action {
+      background-color: #2196f3;
+    }
+
+    .contact-action:hover {
+      transform: scale(1.1);
+    }
+
+    /* 갤러리 모달 */
+    #gallery-modal .modal-content {
+      padding: 0;
+      max-width: 100%;
+      width: 90%;
+      aspect-ratio: 1/1;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f5ead2;
+    }
+
+    .swiper-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: var(--primary-color);
+    }
+
+    /* 알림 토스트 */
+    .toast {
+      position: fixed;
+      bottom: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--dark-color);
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      transition: bottom 0.3s ease;
+      z-index: 11;
+    }
+
+    .toast.show {
+      bottom: 20px;
+    }
+
+    /* 페이지 footer */
+    footer {
+      padding: 20px;
+      background-color: var(--dark-color);
+      color: #fff;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 헤더 섹션 - 메인 이미지 및 기본 정보 -->
+  <section id="header">
+    <div class="date-badge">2025 / 11 / 22 <br/>Saturday</div>
+    <img src="./images/01.jpg" alt="메인 웨딩 이미지" class="main-image" />
+    <h1 class="couple-names">서희원<span style="margin: 15px;">·</span>우윤하</h1>
+    <p class="venue">2025년 11월 22일 토요일 오후 2시 30분<br />파라다이스웨딩컨벤션 2층 스텔라홀
+
+    </p>
+  </section>
+
+  <!-- 초대말 섹션 -->
+  <section id="invitation">
+    <h2 class="section-title">INVITATION</h2>
+    <p class="invitation-text">
+      서로 다른 길을 걸어온 두 사람이<br />
+      사랑으로 하나의 길을 걸어가려 합니다.<br />
+      소중한 분들의 축복 속에<br />
+      첫걸음을 떼는 자리에 함께해 주신다면<br />
+      더없는 기쁨으로 간직하겠습니다.
+    </p>
+
+    <div class="parents-info">
+      OOO · OOO 의 아들 OO<br />
+      OOO · OOO 의 딸 OO
+    </div>
+
+    <div class="contact-btn" id="show-contact-modal">연락하기</div>
+  </section>
+
+  <!-- 결혼식 날짜 섹션 -->
+  <section id="wedding-day">
+    <h2 class="section-title">THE WEDDING DAY</h2>
+    <p class="wedding-date">2025년 11월 22일 오후 02:30</p>
+
+    <div class="calendar">
+      <div class="calendar-header">
+        <div class="calendar-month">2025년 11월</div>
+      </div>
+      <div class="calendar-grid">
+        <!-- 요일 헤더 -->
+        <div class="calendar-day calendar-header-day">일</div>
+        <div class="calendar-day calendar-header-day">월</div>
+        <div class="calendar-day calendar-header-day">화</div>
+        <div class="calendar-day calendar-header-day">수</div>
+        <div class="calendar-day calendar-header-day">목</div>
+        <div class="calendar-day calendar-header-day">금</div>
+        <div class="calendar-day calendar-header-day">토</div>
+
+        <!-- 달력 날짜들은 JavaScript로 동적 생성 -->
+      </div>
+    </div>
+
+    <div class="countdown" id="countdown-text">OO, OO의 결혼식이 00일 남았습니다</div>
+  </section>
+
+  <!-- 갤러리 섹션 -->
+  <section id="gallery">
+    <h2 class="section-title">GALLERY</h2>
+    <div class="gallery-grid">
+      <!-- 갤러리 이미지들은 JavaScript로 동적 생성 -->
+    </div>
+  </section>
+
+  <!-- 오시는 길 섹션 -->
+  <section id="location">
+    <h2 class="section-title">오시는 길</h2>
+    <div class="map-container" id="map">
+      <!-- 네이버 또는 카카오 지도가 여기에 로드됨 -->
+    </div>
+
+    <div class="venue-address">
+      대구 달서구 구마로 52<br />
+      파라다이스 웨딩컨벤션 2층 스텔라홀
+    </div>
+
+    <div class="call-btn">안내전화</div>
+  </section>
+
+  <!-- 마음 전하실 곳 섹션 -->
+  <section id="gifts">
+    <h2 class="section-title">마음 전하실 곳</h2>
+
+    <!-- 신랑측 계좌 아코디언 -->
+    <div class="accordion">
+      <div class="accordion-header" data-target="groom-accounts">
+        <span>신랑측 계좌번호</span>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content" id="groom-accounts">
+        <div class="accordion-inner">
+          <div class="account-info">
+            <div class="account-name">신랑</div>
+            <div class="account-number">국민은행 123-456-78901</div>
+          </div>
+          <div class="account-info">
+            <div class="account-name">신랑 아버지</div>
+            <div class="account-number">신한은행 987-654-32109</div>
+          </div>
+          <div class="account-info">
+            <div class="account-name">신랑 어머니</div>
+            <div class="account-number">우리은행 111-222-33333</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 신부측 계좌 아코디언 -->
+    <div class="accordion">
+      <div class="accordion-header" data-target="bride-accounts">
+        <span>신부측 계좌번호</span>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content" id="bride-accounts">
+        <div class="accordion-inner">
+          <div class="account-info">
+            <div class="account-name">신부</div>
+            <div class="account-number">농협은행 123-4567-8910-11</div>
+          </div>
+          <div class="account-info">
+            <div class="account-name">신부 아버지</div>
+            <div class="account-number">하나은행 444-555-66666</div>
+          </div>
+          <div class="account-info">
+            <div class="account-name">신부 어머니</div>
+            <div class="account-number">기업은행 777-888-99999</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 공유하기 섹션 -->
+  <section id="share">
+    <h2 class="section-title">공유하기</h2>
+
+    <div class="share-btns">
+      <div class="share-btn" id="copy-link">
+        <div class="share-icon">
+          <i class="fa-solid fa-link"></i>
+        </div>
+        <span class="share-text">링크 복사</span>
+      </div>
+
+      <div class="share-btn" id="share-kakao">
+        <div class="share-icon">
+          <i class="fa-solid fa-comment"></i>
+        </div>
+        <span class="share-text">카카오톡 공유</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 섹션 -->
+  <footer>
+    <p>&copy; 2025 모바일 청첩장</p>
+  </footer>
+
+  <!-- 연락처 모달 -->
+  <div class="modal" id="contact-modal">
+    <div class="modal-content">
+      <div class="close-modal" id="close-contact-modal">
+        <i class="fa-solid fa-times"></i>
+      </div>
+      <h3 class="modal-title">연락처</h3>
+      <div class="contact-list">
+        <div class="contact-person">
+          <div class="person-name">신랑</div>
+          <div class="contact-actions">
+            <div class="contact-action call-action" data-tel="01012345678">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-action sms-action" data-tel="01012345678">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-person">
+          <div class="person-name">신랑 아버지</div>
+          <div class="contact-actions">
+            <div class="contact-action call-action" data-tel="01023456789">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-action sms-action" data-tel="01023456789">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-person">
+          <div class="person-name">신랑 어머니</div>
+          <div class="contact-actions">
+            <div class="contact-action call-action" data-tel="01034567890">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-action sms-action" data-tel="01034567890">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-person">
+          <div class="person-name">신부</div>
+          <div class="contact-actions">
+            <div class="contact-action call-action" data-tel="01045678901">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-action sms-action" data-tel="01045678901">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-person">
+          <div class="person-name">신부 아버지</div>
+          <div class="contact-actions">
+            <div class="contact-action call-action" data-tel="01056789012">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-action sms-action" data-tel="01056789012">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-person">
+          <div class="person-name">신부 어머니</div>
+          <div class="contact-actions">
+            <div class="contact-action call-action" data-tel="01067890123">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contact-action sms-action" data-tel="01067890123">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 갤러리 모달 -->
+  <div class="modal" id="gallery-modal">
+    <div class="modal-content">
+      <div class="close-modal" id="close-gallery-modal">
+        <i class="fa-solid fa-times"></i>
+      </div>
+
+      <!-- Swiper 슬라이더 -->
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <!-- 슬라이드는 JavaScript로 동적 생성 -->
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 알림 -->
+  <div class="toast" id="toast">링크가 복사되었습니다</div>
+
+  <script>
+    // 문서 로드 후 실행
+    $(document).ready(function () {
+      // 갤러리 이미지 배열
+      const galleryImages = [
+        './images/ss.jpg',
+        './images/01.jpg',
+        './images/02.jpg',
+        './images/03.jpg',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+      ];
+
+      // 달력 생성
+      createCalendar();
+
+      // 갤러리 이미지 생성
+      createGallery();
+
+      // 카카오 지도 초기화
+      initMap();
+
+      // D-day 카운트다운 초기화
+      updateCountdown();
+
+      // 이벤트 리스너 설정
+      setupEventListeners();
+
+      // 아코디언 초기화
+      initAccordions();
+    });
+
+    // 달력 생성 함수
+    function createCalendar() {
+      const weddingDate = new Date(2025, 10, 22); // 11월은 10 (0부터 시작)
+      const year = weddingDate.getFullYear();
+      const month = weddingDate.getMonth();
+
+      // 해당 월의 첫째 날과 마지막 날 구하기
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+
+      // 달력 시작 위치 계산 (첫째 날의 요일)
+      const startPosition = firstDay.getDay();
+
+      // 달력 그리드에 날짜 추가
+      const calendarGrid = document.querySelector('.calendar-grid');
+
+      // 빈 칸 추가 (첫째 날 이전)
+      for (let i = 0; i < startPosition; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'calendar-day';
+        calendarGrid.appendChild(emptyDay);
+      }
+
+      // 날짜 추가
+      for (let day = 1; day <= lastDay.getDate(); day++) {
+        const dayElement = document.createElement('div');
+        dayElement.textContent = day;
+        dayElement.className = 'calendar-day';
+
+        // 주말 스타일 적용
+        const dayOfWeek = new Date(year, month, day).getDay();
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          dayElement.classList.add('weekend');
+        }
+
+        // 결혼식 날짜 스타일 적용
+        if (day === weddingDate.getDate()) {
+          dayElement.classList.add('wedding-day');
+        }
+
+        calendarGrid.appendChild(dayElement);
+      }
+    }
+
+    // 갤러리 이미지 생성 함수
+    function createGallery() {
+      const galleryGrid = document.querySelector('.gallery-grid');
+      const galleryImages = [
+        './images/ss.jpg',
+        './images/01.jpg',
+        './images/02.jpg',
+        './images/03.jpg',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+        '/api/placeholder/400/320',
+      ];
+
+      // 갤러리 아이템 추가
+      galleryImages.forEach((src, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.dataset.index = index;
+
+        const img = document.createElement('img');
+        img.className = 'gallery-img';
+        img.src = src;
+        img.alt = `웨딩 갤러리 이미지 ${index + 1}`;
+
+        galleryItem.appendChild(img);
+        galleryGrid.appendChild(galleryItem);
+      });
+
+      // Swiper 슬라이더 초기화
+      initGallerySwiper(galleryImages);
+    }
+
+    // 갤러리 Swiper 초기화 함수
+    function initGallerySwiper(images) {
+      // Swiper 슬라이더 컨테이너
+      const swiperWrapper = document.querySelector('.swiper-wrapper');
+
+      // 슬라이드 추가
+      images.forEach((src) => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '웨딩 갤러리 이미지';
+
+        slide.appendChild(img);
+        swiperWrapper.appendChild(slide);
+      });
+    }
+
+    // 카카오 지도 초기화 함수
+    function initMap() {
+      // 카카오맵 API 키가 포함된 스크립트 추가
+      // 실제 API 키로 교체 필요
+      if (typeof kakao === 'undefined') {
+        // 실제 구현 시 카카오맵 API 키가 필요합니다
+        console.log('카카오맵 API가 로드되지 않았습니다.');
+
+        // 임시로 지도 영역에 이미지 표시
+        const mapContainer = document.getElementById('map');
+        mapContainer.innerHTML = '<img src="/api/placeholder/400/320" alt="지도 이미지" style="width:100%; height:100%; object-fit:cover;">';
+        return;
+      }
+
+      // 카카오맵 API가 로드된 경우 구현
+      const mapContainer = document.getElementById('map');
+      const mapOption = {
+        center: new kakao.maps.LatLng(35.8339, 128.5231), // 대구 파라다이스 웨딩컨벤션 좌표 (가정)
+        level: 3
+      };
+
+      const map = new kakao.maps.Map(mapContainer, mapOption);
+
+      // 마커 추가
+      const markerPosition = new kakao.maps.LatLng(35.8339, 128.5231);
+      const marker = new kakao.maps.Marker({
+        position: markerPosition
+      });
+
+      marker.setMap(map);
+
+      // 인포윈도우 추가
+      const infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="padding:5px;font-size:12px;">파라다이스 웨딩컨벤션</div>'
+      });
+
+      infowindow.open(map, marker);
+    }
+
+    // D-day 카운트다운 업데이트 함수
+    function updateCountdown() {
+      const weddingDate = new Date(2025, 10, 22, 14, 30, 0);
+      const today = new Date();
+
+      // 밀리초 단위 차이를 일 단위로 변환
+      const diffTime = weddingDate.getTime() - today.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      // D-day 텍스트 업데이트
+      const countdownText = document.getElementById('countdown-text');
+      if (diffDays > 0) {
+        countdownText.textContent = `희원·윤하의 결혼식이 ${diffDays}일 남았습니다`;
+      } else if (diffDays === 0) {
+        countdownText.textContent = '오늘이 신랑이름, 신부이름의 결혼식입니다';
+      } else {
+        countdownText.textContent = `신랑이름, 신부이름의 결혼식이 ${Math.abs(diffDays)}일 지났습니다`;
+      }
+    }
+
+    // 이벤트 리스너 설정 함수
+    function setupEventListeners() {
+      // 연락처 모달 표시
+      $('#show-contact-modal').click(function () {
+        $('#contact-modal').css('display', 'flex').hide().fadeIn(300);
+      });
+
+      // 연락처 모달 닫기
+      $('#close-contact-modal').click(function () {
+        $('#contact-modal').fadeOut(300);
+      });
+
+      // 갤러리 이미지 클릭 시 모달 표시
+      $('.gallery-item').click(function () {
+        const index = $(this).data('index');
+
+        // Swiper 인스턴스 생성 또는 업데이트
+        if (window.gallerySwiper) {
+          window.gallerySwiper.slideTo(index, 0);
+        } else {
+          window.gallerySwiper = new Swiper('.swiper', {
+            initialSlide: index,
+            loop: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            }
+          });
+        }
+
+        $('#gallery-modal').css('display', 'flex').hide().fadeIn(300);
+      });
+
+      // 갤러리 모달 닫기
+      $('#close-gallery-modal').click(function () {
+        $('#gallery-modal').fadeOut(300);
+      });
+
+      // 링크 복사 버튼
+      $('#copy-link').click(function () {
+        const link = window.location.href;
+        navigator.clipboard.writeText(link)
+          .then(() => showToast('링크가 복사되었습니다'))
+          .catch(() => {
+            // 클립보드 API를 지원하지 않는 경우 대체 방법
+            const tempInput = document.createElement('input');
+            tempInput.value = link;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('링크가 복사되었습니다');
+          });
+      });
+
+      // 카카오톡 공유 버튼
+      $('#share-kakao').click(function () {
+        if (typeof Kakao !== 'undefined') {
+          Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+              title: '신랑이름 & 신부이름의 결혼식에 초대합니다',
+              description: '2025년 11월 22일 토요일 오후 2시 30분',
+              imageUrl: 'https://example.com/wedding.jpg', // 실제 이미지 URL로 교체 필요
+              link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href
+              }
+            },
+            buttons: [
+              {
+                title: '청첩장 보기',
+                link: {
+                  mobileWebUrl: window.location.href,
+                  webUrl: window.location.href
+                }
+              }
+            ]
+          });
+        } else {
+          showToast('카카오톡 공유 기능을 사용할 수 없습니다');
+        }
+      });
+
+      // 안내전화 버튼
+      $('.call-btn').click(function () {
+        location.href = 'tel:01012345678'; // 실제 전화번호로 교체 필요
+      });
+
+      // 전화 버튼
+      $('.call-action').click(function () {
+        const tel = $(this).data('tel');
+        location.href = `tel:${tel}`;
+      });
+
+      // 문자 버튼
+      $('.sms-action').click(function () {
+        const tel = $(this).data('tel');
+        location.href = `sms:${tel}`;
+      });
+
+      // 모달 외부 클릭 시 닫기
+      $('.modal').click(function (e) {
+        if ($(e.target).hasClass('modal')) {
+          $(this).fadeOut(300);
+        }
+      });
+    }
+
+    // 아코디언 초기화 함수
+    function initAccordions() {
+      $('.accordion-header').click(function () {
+        const target = $(this).data('target');
+        const content = $(`#${target}`);
+        const icon = $(this).find('.accordion-icon');
+
+        // 열림/닫힘 상태 토글
+        if (content.css('max-height') === '0px' || content.css('max-height') === 'none') {
+          // 모든 아코디언 닫기
+          $('.accordion-content').css('max-height', '0');
+          $('.accordion-icon').css('transform', 'rotate(0deg)');
+
+          // 선택한 아코디언 열기
+          content.css('max-height', content[0].scrollHeight + 'px');
+          icon.css('transform', 'rotate(180deg)');
+        } else {
+          // 선택한 아코디언 닫기
+          content.css('max-height', '0');
+          icon.css('transform', 'rotate(0deg)');
+        }
+      });
+    }
+
+    // 토스트 메시지 표시 함수
+    function showToast(message) {
+      const toast = $('#toast');
+      toast.text(message);
+      toast.addClass('show');
+
+      // 3초 후 토스트 숨기기
+      setTimeout(() => {
+        toast.removeClass('show');
+      }, 3000);
+    }
+
+  </script>
+</body>
+
+</html>
