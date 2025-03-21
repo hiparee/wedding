@@ -16,6 +16,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
 
+  <!-- 네이버지도 -->
+  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nkg3gcqbiy&submodules=panorama"></script>
+  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps-panorama.js"></script>
+
 
   <style>
     .petals-container {
@@ -629,8 +633,8 @@
     </p>
 
     <div class="parents-info">
-      OOO · OOO 의 아들 OO<br />
-      OOO · OOO 의 딸 OO
+      OOO · OOO 의 아들 <b>서희원</b><br />
+      OOO · OOO 의 딸 <b>우윤하</b>
     </div>
 
     <div class="contact-btn" id="show-contact-modal">연락하기</div>
@@ -675,6 +679,7 @@
     <h2 class="section-title">오시는 길</h2>
     <div class="map-container" id="map">
       <!-- 네이버 또는 카카오 지도가 여기에 로드됨 -->
+      <div id="map" style="width:100%;height:600px;"></div>
     </div>
 
     <div class="venue-address">
@@ -890,7 +895,7 @@
       createGallery();
 
       // 카카오 지도 초기화
-      initMap();
+      // initMap();
 
       // D-day 카운트다운 초기화
       updateCountdown();
@@ -1207,7 +1212,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       const petalsContainer = document.querySelector('.petals-container');
-      const numPetals = 25; // 꽃잎 개수
+      const numPetals = 40; // 꽃잎 개수
 
       // 꽃잎 생성 함수
       function createPetals() {
@@ -1217,7 +1222,7 @@
 
           // 랜덤 크기 (15px ~ 30px)
           // const size = Math.floor(Math.random() * 15) + 15;
-          const size = Math.floor(Math.random() * 8) + 8; 
+          const size = Math.floor(Math.random() * 5) + 8; 
           petal.style.width = `${size}px`;
           petal.style.height = `${size}px`;
 
@@ -1246,6 +1251,28 @@
       // 꽃잎 생성 호출
       createPetals();
     });
+
+
+    //네이버 지도
+    var mapOptions = {
+        center: new naver.maps.LatLng(35.8369055, 128.5333427),
+        zoom: 15
+      };
+
+      var map = new naver.maps.Map('map', mapOptions);
+
+      new naver.maps.Marker({
+          position: new naver.maps.LatLng(35.8369055, 128.5333427),
+          map: map
+        });
+
+      // var listener = naver.maps.Event.addListener(map, 'click', function (e) {
+      //   console.log( e.coord);
+      //     var marker = new naver.maps.Marker({
+      //       position: e.coord,
+      //       map: map
+      //     });
+      //   });
   </script>
 </body>
 
