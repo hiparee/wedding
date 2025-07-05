@@ -113,7 +113,13 @@
       font-weight: normal;
       font-style: normal;
     }
-
+    
+    @font-face {
+    font-family: 'HakgyoansimWoojuR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
     /* 기본 스타일 */
     * {
@@ -123,7 +129,7 @@
     }
 
     body {
-      font-family: 'GowunBatang-Regular', sans-serif;
+      font-family: 'HakgyoansimWoojuR', sans-serif;
       color: #555;
       line-height: 1.6;
       background-color: #fff;
@@ -137,11 +143,12 @@
 
     /* 색상 변수 정의 (파스텔톤) */
     :root {
-      --primary-color: #ac8678;
-      --secondary-color: #e6b8a2;
-      --accent-color: #c39380;
-      --light-color: #fdf6f0;
-      --dark-color: #9d8189;
+      --primary-color: #788dac;
+      --secondary-color: #a2c5e6;
+      --accent-color: #2a5070;
+      --light-color: #dee7e5;
+      /* #dee7e5 */
+      --dark-color: #788dac;
     }
 
     /* 섹션 공통 스타일 */
