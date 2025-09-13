@@ -1,385 +1,407 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>모바일 청첩장</title>
+    <!-- 기본 오픈 그래프 태그 -->
+    <meta property="og:type" content="website" />
+    <!-- <meta property="og:url" content="https://hiparee.github.io/hj_wedding/"> -->
+    <meta property="og:title" content="희원 ♡ 윤하 결혼합니다" />
+    <meta property="og:image" content="./images/07.jpg" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="400" />
+    <meta
+      property="og:description"
+      content="2025-05-11 일요일 오후 1시&#10;
+모바일청첩장"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>모바일 청첩장</title>
-  <!-- 기본 오픈 그래프 태그 -->
-  <meta property="og:type" content="website">
-  <!-- <meta property="og:url" content="https://hiparee.github.io/hj_wedding/"> -->
-  <meta property="og:title" content="희원 ♡ 윤하 결혼합니다">
-  <meta property="og:image" content="./images/07.jpg">
-  <meta property="og:image:width" content="300">
-  <meta property="og:image:height" content="400">
-  <meta property="og:description" content="2025-05-11 일요일 오후 1시&#10;
-모바일청첩장">
+    <!-- 폰트어썸 아이콘 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <!-- 폰트어썸 아이콘 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Swiper 슬라이더 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
 
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 네이버지도 -->
+    <script
+      type="text/javascript"
+      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nkg3gcqbiy&submodules=panorama"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://oapi.map.naver.com/openapi/v3/maps-panorama.js"
+    ></script>
 
-  <!-- Swiper 슬라이더 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <!-- 카카오 -->
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+      integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- 네이버지도 -->
-  <script type="text/javascript"
-    src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nkg3gcqbiy&submodules=panorama"></script>
-  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps-panorama.js"></script>
-
-  <!-- 카카오 -->
-  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
-    integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>
-
-
-  <style>
-    /* 음악버튼 */
-     .audio-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            /* width: 50px;
+    <style>
+      /* 음악버튼 */
+      .audio-control {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        /* width: 50px;
             height: 50px; */
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        .audio-control img {
-            width: 40px;
-            height: 40px;
-          border: none;
-          outline: none;
-          padding: 0;
-          z-index: 100;
-          cursor: pointer;
-        }
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1000;
+      }
+      .audio-control img {
+        width: 40px;
+        height: 40px;
+        border: none;
+        outline: none;
+        padding: 0;
+        z-index: 100;
+        cursor: pointer;
+      }
 
+      /* 꽃잎효과 */
+      .petals-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 5;
+      }
 
-        /* 꽃잎효과 */
-    .petals-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .petal {
-      position: absolute;
-      background-size: 100% 100%;
-      opacity: 0.8;
-      top: -10%;
-      pointer-events: none;
-      animation-name: falling;
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-      animation-fill-mode: both;
-    }
-
-    .petal:nth-child(odd) {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C70,25 100,25 100,50 C100,75 70,100 50,100 C30,100 0,75 0,50 C0,25 30,0 50,0 Z' fill='%23fefefe'/%3E%3C/svg%3E");
-    }
-
-    .petal:nth-child(even) {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C70,25 100,25 100,50 C100,75 70,100 50,100 C30,100 0,75 0,50 C0,25 30,0 50,0 Z' fill='%23ededed'/%3E%3C/svg%3E");
-    }
-
-    @keyframes falling {
-      0% {
+      .petal {
+        position: absolute;
+        background-size: 100% 100%;
+        opacity: 0.8;
         top: -10%;
-        transform: translateX(0) rotate(0deg);
+        pointer-events: none;
+        animation-name: falling;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
       }
 
-      100% {
-        top: 100%;
-        transform: translateX(calc(var(--random-x) * 1px)) rotate(calc(var(--random-rotate) * 1deg));
+      .petal:nth-child(odd) {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C70,25 100,25 100,50 C100,75 70,100 50,100 C30,100 0,75 0,50 C0,25 30,0 50,0 Z' fill='%23fefefe'/%3E%3C/svg%3E");
       }
-    }
 
-    @font-face {
-      font-family: 'GowunBatang-Regular';
-      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-    
-    @font-face {
-    font-family: 'HakgyoansimWoojuR';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
+      .petal:nth-child(even) {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,0 C70,25 100,25 100,50 C100,75 70,100 50,100 C30,100 0,75 0,50 C0,25 30,0 50,0 Z' fill='%23ededed'/%3E%3C/svg%3E");
+      }
 
-    /* 기본 스타일 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+      @keyframes falling {
+        0% {
+          top: -10%;
+          transform: translateX(0) rotate(0deg);
+        }
 
-    body {
-      font-family: 'HakgyoansimWoojuR', sans-serif;
-      color: #555;
-      line-height: 1.6;
-      background-color: #fff;
-    }
+        100% {
+          top: 100%;
+          transform: translateX(calc(var(--random-x) * 1px))
+            rotate(calc(var(--random-rotate) * 1deg));
+        }
+      }
 
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-    }
+      @font-face {
+        font-family: "GowunBatang-Regular";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-    /* 색상 변수 정의 (파스텔톤) */
-    :root {
-      --primary-color: #788dac;
-      --secondary-color: #a2c5e6;
-      --accent-color: #2a5070;
-      --light-color: #dee7e5;
-      /* #dee7e5 */
-      --dark-color: #788dac;
-    }
+      @font-face {
+        font-family: "HakgyoansimWoojuR";
+        src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-    /* 섹션 공통 스타일 */
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
+      /* 기본 스타일 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    .section-title {
-      font-size: 1.5rem;
-      margin-bottom: 40px;
-      color: var(--dark-color);
-      position: relative;
-      display: inline-block;
-    }
+      body {
+        font-family: "HakgyoansimWoojuR", sans-serif;
+        color: #555;
+        line-height: 1.6;
+        background-color: #fff;
+      }
 
-    .section-title::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background-color: var(--primary-color);
-      bottom: -10px;
-      left: 0;
-    }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
 
-    /* 헤더 섹션 */
-    #header {
-      /* height: 100vh; */
-      background-color: var(--light-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 0;
-      padding-bottom: 50px;
-    }
+      /* 색상 변수 정의 (파스텔톤) */
+      :root {
+        --primary-color: #788dac;
+        --secondary-color: #a2c5e6;
+        --accent-color: #2a5070;
+        --light-color: #dee7e5;
+        /* #dee7e5 */
+        --dark-color: #788dac;
+      }
 
-    .date-badge {
-      /* background-color: rgba(255, 255, 255, 0.8); */
-      padding: 15px 25px;
-      border-radius: 30px;
-      font-size: 1.5rem;
-      color: var(--dark-color);
-      /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); */
-      z-index: 2;
-    }
+      /* 섹션 공통 스타일 */
+      section {
+        padding: 60px 20px;
+        text-align: center;
+      }
 
-    .main-image {
-      width: 100%;
-      /* width: 90%;
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+        color: var(--dark-color);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary-color);
+        bottom: -10px;
+        left: 0;
+      }
+
+      /* 헤더 섹션 */
+      #header {
+        /* height: 100vh; */
+        background-color: var(--light-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 0;
+        padding-bottom: 50px;
+      }
+
+      .date-badge {
+        /* background-color: rgba(255, 255, 255, 0.8); */
+        padding: 15px 25px;
+        border-radius: 30px;
+        font-size: 1.5rem;
+        color: var(--dark-color);
+        /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); */
+        z-index: 2;
+      }
+
+      .main-image {
+        width: 100%;
+        /* width: 90%;
       height: 50vh;
       object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       margin: 20px 0; */
-    }
+      }
 
-    .couple-names {
-      font-size: 1.3rem;
-      margin: 20px 0;
-      color: var(--dark-color);
-    }
+      .couple-names {
+        font-size: 1.3rem;
+        margin: 20px 0;
+        color: var(--dark-color);
+      }
 
-    .venue {
-      font-size: 1rem;
-      color: var(--accent-color);
-    }
+      .venue {
+        font-size: 1rem;
+        color: var(--accent-color);
+      }
 
-    /* 초대말 섹션 */
-    #invitation {
-      background-color: #fff;
-    }
+      /* 초대말 섹션 */
+      #invitation {
+        background-color: #fff;
+      }
 
-    .invitation-text {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      margin-bottom: 100px;
-      color: #666;
-    }
+      .invitation-text {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        margin-bottom: 100px;
+        color: #666;
+      }
 
-    .parents-info {
-      margin: 30px 0;
-      font-size: 1.2rem;
-      line-height: 2;
-    }
+      .gifts-text {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        margin-bottom: 50px;
+        color: #666;
+      }
 
-    .contact-btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: var(--primary-color);
-      color: #fff;
-      border-radius: 30px;
-      font-size: 1rem;
-      margin-top: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+      .parents-info {
+        margin: 30px 0;
+        font-size: 1.2rem;
+        line-height: 2;
+      }
 
-    .contact-btn:hover {
-      background-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
+      .contact-btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border-radius: 30px;
+        font-size: 1rem;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
 
-    /* 날짜 섹션 */
-    #wedding-day {
-      background-color: var(--light-color);
-    }
+      .contact-btn:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+      }
 
-    .wedding-date {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      color: var(--dark-color);
-    }
+      /* 날짜 섹션 */
+      #wedding-day {
+        background-color: var(--light-color);
+      }
 
-    .calendar {
-      background-color: #fff;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
+      .wedding-date {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: var(--dark-color);
+      }
 
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
+      .calendar {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
 
-    .calendar-month {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: var(--dark-color);
-    }
+      .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
 
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-    }
+      .calendar-month {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--dark-color);
+      }
 
-    .calendar-day {
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+      }
 
-      font-size: 0.9rem;
-      border-radius: 50%;
-      aspect-ratio: 1/1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .calendar-day {
+        font-size: 0.9rem;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .calendar-header-day {
-      font-weight: bold;
-      color: var(--dark-color);
-    }
+      .calendar-header-day {
+        font-weight: bold;
+        color: var(--dark-color);
+      }
 
-    .calendar-day.weekend {
-      color: var(--accent-color);
-    }
+      .calendar-day.weekend {
+        color: var(--accent-color);
+      }
 
-    .calendar-day.wedding-day {
-      background-color: var(--primary-color);
-      color: #fff;
-      font-weight: bold;
-      transform: scale(1.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+      .calendar-day.wedding-day {
+        background-color: var(--primary-color);
+        color: #fff;
+        font-weight: bold;
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
 
-    .countdown {
-      font-size: 1.2rem;
-      color: var(--dark-color);
-      margin-top: 20px;
-    }
+      .countdown {
+        font-size: 1.2rem;
+        color: var(--dark-color);
+        margin-top: 20px;
+      }
 
-    /* 갤러리 섹션 */
-    #gallery {
-      background-color: #fff;
-    }
+      /* 갤러리 섹션 */
+      #gallery {
+        background-color: #fff;
+      }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+      }
 
-    .gallery-item {
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+      .gallery-item {
+        aspect-ratio: 1/1;
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: pointer;
+      }
 
-    .gallery-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
+      .gallery-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
 
-    .gallery-item:hover .gallery-img {
-      transform: scale(1.05);
-    }
+      .gallery-item:hover .gallery-img {
+        transform: scale(1.05);
+      }
 
-    /* 오시는 길 섹션 */
-    #location {
-      background-color: var(--light-color);
-    }
+      /* 오시는 길 섹션 */
+      #location {
+        background-color: var(--light-color);
+      }
 
-    .map-container {
-      height: 300px;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
+      .map-container {
+        height: 300px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
 
-    .navigation {
+      .navigation {
         position: relative;
         text-align: center;
-    }
+      }
 
-    .navigation ul {
+      .navigation ul {
         display: inline-block;
         padding: 7px 0px;
-    }
+      }
 
-    .navigation ul li {
+      .navigation ul li {
         list-style: none;
         float: left;
         padding-top: 5px;
@@ -387,569 +409,605 @@
         display: list-item;
         text-align: -webkit-match-parent;
         unicode-bidi: isolate;
-    }
+      }
 
-    .navigation ul li img {
+      .navigation ul li img {
         width: 22px;
         vertical-align: middle;
         padding-right: 5px;
-    }
+      }
 
-    .navigation li a {
+      .navigation li a {
         color: #666;
         font-size: 17px;
         letter-spacing: -0.38px;
         text-decoration: none;
-    }
+      }
 
-    .venue-address {
-      margin-bottom: 20px;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
+      .venue-address {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
 
-    .call-btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: var(--primary-color);
-      color: #fff;
-      border-radius: 30px;
-      font-size: 1rem;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-bottom:30px;
-    }
+      .call-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border-radius: 30px;
+        font-size: 1rem;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+      }
 
-    .call-btn:hover {
-      background-color: var(--accent-color);
-    }
+      .call-btn:hover {
+        background-color: var(--accent-color);
+      }
 
+      .etcarea {
+        margin: 30px;
+        text-align: left;
+      }
 
-    .etcarea {
-      margin: 30px;
-      text-align: left;
-    }
+      .etc_info {
+        margin: 20px 3% 0;
+        padding-bottom: 60px;
+        border-bottom: 1px solid #ddd;
+      }
 
-    .etc_info {
-      margin: 20px 3% 0;
-      padding-bottom: 60px;
-      border-bottom: 1px solid #ddd;
-    }
+      .etc_info li {
+        list-style: none;
+      }
 
-    .etc_info li {
-      list-style: none;
-    }
-
-    .etc_info li:not(:last-child) {
+      .etc_info li:not(:last-child) {
         margin-bottom: 16px;
-    }
+      }
 
-    /* 마음 전하실 곳 섹션 */
-    #gifts {
-      background-color: #fff;
-    }
+      /* 마음 전하실 곳 섹션 */
+      #gifts {
+        background-color: #fff;
+      }
 
-    .accordion {
-      margin-top: 30px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    }
+      .accordion {
+        margin-top: 30px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
 
-    .accordion-header {
-      padding: 15px 20px;
-      background-color: var(--primary-color);
-      color: #fff;
-      font-size: 1.1rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
+      .accordion-header {
+        padding: 15px 20px;
+        background-color: var(--primary-color);
+        color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
 
-    .accordion-header:hover {
-      background-color: var(--accent-color);
-    }
+      .accordion-header:hover {
+        background-color: var(--accent-color);
+      }
 
-    .accordion-icon {
-      transition: transform 0.3s ease;
-    }
+      .accordion-icon {
+        transition: transform 0.3s ease;
+      }
 
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      background-color: #fff;
-    }
+      .accordion-content {
+        font-size: 16px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background-color: #fff;
+      }
 
-    .accordion-inner {
-      padding: 20px;
-    }
+      .accordion-inner {
+        padding: 20px;
+      }
 
-    .account-number span {
-      font-weight: bold;
-    }
+      .account-number span {
+        font-weight: bold;
+      }
 
-    .copy-btn {
-      background-color: #e5e5e5;
-      color: #333;
-      border: none;
-      border-radius: 4px;
-      padding: 5px 15px;
-      margin-left: 10px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: all 0.3s;
-      width: 150px;
-    }
+      .copy-btn {
+        background-color: #e5e5e5;
+        color: #333;
+        border: none;
+        border-radius: 4px;
+        padding: 5px 15px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.3s;
+        width: 150px;
+      }
 
-    .copy-btn:hover {
-      background-color: #a5a5a5;
-      /* 호버 시  */
-    }
+      .copy-btn:hover {
+        background-color: #a5a5a5;
+        /* 호버 시  */
+      }
 
-    .copy-success {
-      background-color: #778169;
-      /* 복사 성공 시  */
-      color: white;
-    }
+      .copy-success {
+        background-color: #778169;
+        /* 복사 성공 시  */
+        color: white;
+      }
 
-    .account-info {
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
+      .account-info {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+      }
 
-    .account-info:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
+      .account-info:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
 
-    .account-name {
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: var(--dark-color);
-    }
+      .account-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: var(--dark-color);
+        font-size: 17px;
+      }
 
-    /* 공유하기 섹션 */
-    #share {
-      /* background-color: var(--light-color); */
-      background-color: #fff;
-      padding-bottom: 80px;
-    }
+      /* 공유하기 섹션 */
+      #share {
+        /* background-color: var(--light-color); */
+        background-color: #fff;
+        padding-bottom: 80px;
+      }
 
-    .share-btns {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
+      .share-btns {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+      }
 
-    .share-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+      .share-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
 
-    .share-btn:hover {
-      transform: translateY(-3px);
-    }
+      .share-btn:hover {
+        transform: translateY(-3px);
+      }
 
-    .share-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      background-color: var(--primary-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.3rem;
-      color: #fff;
-    }
+      .share-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.3rem;
+        color: #fff;
+      }
 
-    .share-icon a, 
-    .share-icon img {
-      width:100%;
-      height: 100%;
-    }
+      .share-icon a,
+      .share-icon img {
+        width: 100%;
+        height: 100%;
+      }
 
-    .share-text {
-      font-size: 0.9rem;
-      color: var(--dark-color);
-    }
+      .share-text {
+        font-size: 0.9rem;
+        color: var(--dark-color);
+      }
 
-    /* 모달 공통 스타일 */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 10;
-      justify-content: center;
-      align-items: center;
-    }
+      /* 모달 공통 스타일 */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 10;
+        justify-content: center;
+        align-items: center;
+      }
 
-    .modal-content {
-      background-color: #fff;
-      border-radius: 15px;
-      max-width: 90%;
-      max-height: 90%;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
+      .modal-content {
+        /* background-color: #fff; */
+        /* border-radius: 15px; */
+        max-width: 90%;
+        /* max-height: 90%; */
+        overflow: hidden;
+        /* position: relative; */
+        /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); */
+      }
 
-    .close-modal {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.5rem;
-      color: #fff;
-      z-index: 2;
-      cursor: pointer;
-    }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: #fff;
+        z-index: 2;
+        cursor: pointer;
+      }
 
-    /* 연락처 모달 */
-    #contact-modal .modal-content {
-      width: 90%;
-      padding: 30px;
-      max-width: 500px;
-    }
+      /* 연락처 모달 */
+      #contact-modal .modal-content {
+        width: 90%;
+        padding: 30px;
+        max-width: 500px;
+      }
 
-    .modal-title {
-      font-size: 1.4rem;
-      margin-bottom: 25px;
-      color: var(--dark-color);
-    }
+      .modal-title {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+        color: var(--dark-color);
+      }
 
-    .contact-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
 
-    .contact-person {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
-    }
+      .contact-person {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+      }
 
-    .contact-person:last-child {
-      border-bottom: none;
-    }
+      .contact-person:last-child {
+        border-bottom: none;
+      }
 
-    .person-name {
-      font-size: 1rem;
-      color: #555;
-    }
+      .person-name {
+        font-size: 1rem;
+        color: #555;
+      }
 
-    .contact-actions {
-      display: flex;
-      gap: 10px;
-    }
+      .contact-actions {
+        display: flex;
+        gap: 10px;
+      }
 
-    .contact-action {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+      .contact-action {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-    .call-action {
-      background-color: #4caf50;
-    }
+      .call-action {
+        background-color: #4caf50;
+      }
 
-    .sms-action {
-      background-color: #2196f3;
-    }
+      .sms-action {
+        background-color: #2196f3;
+      }
 
-    .contact-action:hover {
-      transform: scale(1.1);
-    }
+      .contact-action:hover {
+        transform: scale(1.1);
+      }
 
-    /* 갤러리 모달 */
-    #gallery-modal .modal-content {
-      padding: 0;
-      max-width: 100%;
-      width: 93%;
-      aspect-ratio: 1/1.3;
-    }
+      /* 갤러리 모달 */
+      #gallery-modal .modal-content {
+        padding: 0;
+        max-width: 100%;
+        /* width: 97%; */
+        aspect-ratio: 1/1.3;
+      }
 
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
 
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      /* background-color: #ffffff; */
-    }
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: #ffffff; */
+      }
 
-    .swiper-slide img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
+      .swiper-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
 
-    .swiper-pagination-bullet-active {
-      background-color: var(--primary-color);
-    }
+      .swiper-pagination-bullet-active {
+        background-color: var(--primary-color);
+      }
 
-    /* 알림 토스트 */
-    .toast {
-      position: fixed;
-      bottom: -260px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: var(--dark-color);
-      color: #fff;
-      padding: 12px 25px;
-      border-radius: 30px;
-      font-size: 1rem;
-      transition: bottom 0.3s ease;
-      z-index: 11;
-    }
+      /* 알림 토스트 */
+      .toast {
+        position: fixed;
+        bottom: -260px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--dark-color);
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 30px;
+        font-size: 1rem;
+        transition: bottom 0.3s ease;
+        z-index: 11;
+      }
 
-    .toast.show {
-      bottom: 20px;
-    }
+      .toast.show {
+        bottom: 20px;
+      }
 
-    /* 페이지 footer */
-    footer {
-      padding: 20px;
-      background-color: var(--dark-color);
-      color: #fff;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+      /* 페이지 footer */
+      footer {
+        padding: 20px;
+        background-color: var(--dark-color);
+        color: #fff;
+        text-align: center;
+        font-size: 0.9rem;
+      }
 
-    .close-modal .fa-times {
-      color: #555555;
-    }
+      .close-modal .fa-times {
+        color: #ffffff;
+      }
 
-    /* 로딩 화면 스타일 */
-    #loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      /* 불투명한 블랙 배경 */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      /* 최상위 레이어 */
-      transition: opacity 0.5s ease;
-      /* 페이드 아웃 효과 */
-    }
+      /* 로딩 화면 스타일 */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        /* 불투명한 블랙 배경 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        /* 최상위 레이어 */
+        transition: opacity 0.5s ease;
+        /* 페이드 아웃 효과 */
+      }
 
-    .loader {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .dot {
-      width: 12px;
-      height: 12px;
-      margin: 0 6px;
-      background-color: #ffffff;
-      border-radius: 50%;
-      display: inline-block;
-      opacity: 0.7;
-    }
-
-    .dot-1 {
-      animation: dot-animation 1.4s infinite ease-in-out;
-      animation-delay: 0s;
-    }
-
-    .dot-2 {
-      animation: dot-animation 1.4s infinite ease-in-out;
-      animation-delay: 0.2s;
-    }
-
-    .dot-3 {
-      animation: dot-animation 1.4s infinite ease-in-out;
-      animation-delay: 0.4s;
-    }
-
-    @keyframes dot-animation {
-
-      0%,
-      100% {
-        transform: scale(0.7);
+      .dot {
+        width: 12px;
+        height: 12px;
+        margin: 0 6px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: inline-block;
         opacity: 0.7;
       }
 
-      50% {
-        transform: scale(1.2);
-        opacity: 1;
+      .dot-1 {
+        animation: dot-animation 1.4s infinite ease-in-out;
+        animation-delay: 0s;
       }
-    }
 
-    
-  </style>
-</head>
+      .dot-2 {
+        animation: dot-animation 1.4s infinite ease-in-out;
+        animation-delay: 0.2s;
+      }
 
-<body style="text-align: center;">
-  <!-- 입장 음악재생 우회 -->
-  <div id="entrance">
-    <button id="entrance-btn" style="border:none;background: none;position: fixed;top: 0;left: 0;right: 0;bottom:0;z-index: 1000;">
-    </button>
-  </div>
+      .dot-3 {
+        animation: dot-animation 1.4s infinite ease-in-out;
+        animation-delay: 0.4s;
+      }
 
+      @keyframes dot-animation {
+        0%,
+        100% {
+          transform: scale(0.7);
+          opacity: 0.7;
+        }
 
-  <!-- 오디오 태그 (자동재생, 음소거 기본 설정) -->
-  <audio id="bg-music" loop>
-    <source src="./audio/I_Love_Penny_Sue.mp3" type="audio/mpeg">
-    브라우저가 오디오 태그를 지원하지 않습니다.
-  </audio>
-  <!-- 음악 컨트롤 버튼 -->
-  <div id="audio-btn" class="audio-control">
-    <img id="audio-icon" src="./images/start_btn.svg" alt="Play">
-  </div>
-  
-  <!-- 로딩 화면 -->
-  <div id="loading-screen">
-    <div class="loader">
-      <div class="dot dot-1"></div>
-      <div class="dot dot-2"></div>
-      <div class="dot dot-3"></div>
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body style="text-align: center">
+    <!-- 입장 음악재생 우회 -->
+    <div id="entrance">
+      <button
+        id="entrance-btn"
+        style="
+          border: none;
+          background: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1000;
+        "
+      ></button>
     </div>
-  </div>
 
-  <div style="max-width: 800px;text-align: center; display: inline-block;">
-    <!-- 꽃잎 효과를 위한 div -->
-    <div class="petals-container"></div>
+    <!-- 오디오 태그 (자동재생, 음소거 기본 설정) -->
+    <audio id="bg-music" loop>
+      <source src="./audio/I_Love_Penny_Sue.mp3" type="audio/mpeg" />
+      브라우저가 오디오 태그를 지원하지 않습니다.
+    </audio>
+    <!-- 음악 컨트롤 버튼 -->
+    <div id="audio-btn" class="audio-control">
+      <img id="audio-icon" src="./images/start_btn.svg" alt="Play" />
+    </div>
 
-
-    <!-- 헤더 섹션 - 메인 이미지 및 기본 정보 -->
-    <section id="header">
-      <!-- <div class="date-badge">2025 / 11 / 22 <br />Saturday</div> -->
-      <div style="position: relative;">
-        <img src="./images/main-text.png" style="position: absolute;top: 0px;left: 0px;right:0px;bottom:0px;width: 100%;" />
-        <img src="./images/main.jpg" alt="메인 웨딩 이미지" class="main-image" />
+    <!-- 로딩 화면 -->
+    <div id="loading-screen">
+      <div class="loader">
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
       </div>
-      
-      
-      <h1 class="couple-names">희원<span style="margin: 15px;">·</span>윤하</h1>
-      <p class="venue">2025. 11. 22 (토) PM 14:30
-        <br />파라다이스 웨딩컨벤션 스텔라홀
+    </div>
 
-      </p>
-    </section>
+    <div style="max-width: 800px; text-align: center; display: inline-block">
+      <!-- 꽃잎 효과를 위한 div -->
+      <div class="petals-container"></div>
 
-    <!-- 초대말 섹션 -->
-    <section id="invitation">
-      <h2 class="section-title">INVITATION</h2>
-      <p class="invitation-text">
-        서로가 마주보며 다져온 사랑을<br />
-        이제 함께 한 곳을 바라보며<br />
-        걸어갈 수 있는 큰 사랑으로 키우고자 합니다.<br />
-        저희 두 사람이 사랑의 이름으로<br />
-        지켜나갈 수 있게 앞날을<br />
-        축복해 주시면 감사하겠습니다.
-      </p>
-
-      <div class="parents-info">
-        <b>서영석</b> · <b>구은주</b> 의 <span style="display:inline-block; width: 50px;">아들</span> <b>서희원</b><br />
-        <b>우창택</b> · <b>남현미</b> 의 <span style="display:inline-block; width: 50px;">딸</span> <b>우윤하</b>
-      </div>
-
-      <div class="contact-btn" id="show-contact-modal">연락하기</div>
-    </section>
-
-    <!-- 결혼식 날짜 섹션 -->
-    <section id="wedding-day">
-      <h2 class="section-title">THE WEDDING DAY</h2>
-      <p class="wedding-date">2025년 11월 22일 오후 02:30</p>
-
-      <div class="calendar">
-        <div class="calendar-header">
-          <div class="calendar-month">2025년 11월</div>
+      <!-- 헤더 섹션 - 메인 이미지 및 기본 정보 -->
+      <section id="header">
+        <!-- <div class="date-badge">2025 / 11 / 22 <br />Saturday</div> -->
+        <div style="position: relative">
+          <img
+            src="./images/main-text.png"
+            style="
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              right: 0px;
+              bottom: 0px;
+              width: 100%;
+            "
+          />
+          <img
+            src="./images/main.jpg"
+            alt="메인 웨딩 이미지"
+            class="main-image"
+          />
         </div>
-        <div class="calendar-grid">
-          <!-- 요일 헤더 -->
-          <div class="calendar-day calendar-header-day">일</div>
-          <div class="calendar-day calendar-header-day">월</div>
-          <div class="calendar-day calendar-header-day">화</div>
-          <div class="calendar-day calendar-header-day">수</div>
-          <div class="calendar-day calendar-header-day">목</div>
-          <div class="calendar-day calendar-header-day">금</div>
-          <div class="calendar-day calendar-header-day">토</div>
 
-          <!-- 달력 날짜들은 JavaScript로 동적 생성 -->
+        <h1 class="couple-names">
+          희원<span style="margin: 15px">·</span>윤하
+        </h1>
+        <p class="venue">
+          2025. 11. 22 (토) PM 14:30 <br />파라다이스 웨딩컨벤션 스텔라홀
+        </p>
+      </section>
+
+      <!-- 초대말 섹션 -->
+      <section id="invitation">
+        <h2 class="section-title">INVITATION</h2>
+        <p class="invitation-text">
+          서로가 마주보며 다져온 사랑을<br />
+          이제 함께 한 곳을 바라보며<br />
+          걸어갈 수 있는 큰 사랑으로 키우고자 합니다.<br />
+          저희 두 사람이 사랑의 이름으로<br />
+          지켜나갈 수 있게 앞날을<br />
+          축복해 주시면 감사하겠습니다.
+        </p>
+
+        <div class="parents-info">
+          <b>서영석</b> · <b>구은주</b> 의
+          <span style="display: inline-block; width: 50px">아들</span>
+          <b>서희원</b><br />
+          <b>우창택</b> · <b>남현미</b> 의
+          <span style="display: inline-block; width: 50px">딸</span>
+          <b>우윤하</b>
         </div>
-      </div>
 
-      <div class="countdown" id="countdown-text">OO, OO의 결혼식이 00일 남았습니다</div>
-    </section>
+        <div class="contact-btn" id="show-contact-modal">연락하기</div>
+      </section>
 
-    <!-- 갤러리 섹션 -->
-    <section id="gallery">
-      <h2 class="section-title">GALLERY</h2>
-      <div class="gallery-grid">
-        <!-- 갤러리 이미지들은 JavaScript로 동적 생성 -->
-      </div>
-    </section>
+      <!-- 결혼식 날짜 섹션 -->
+      <section id="wedding-day">
+        <h2 class="section-title">THE WEDDING DAY</h2>
+        <p class="wedding-date">2025년 11월 22일 오후 02:30</p>
 
-    <!-- 오시는 길 섹션 -->
-    <section id="location">
-      <h2 class="section-title">오시는 길</h2>
-      
-      <div class="venue-address">
-        대구광역시 달서구 구마로 52(본동)
-        <br />
-        파라다이스 웨딩컨벤션 3F 스텔라홀
-      </div>
+        <div class="calendar">
+          <div class="calendar-header">
+            <div class="calendar-month">2025년 11월</div>
+          </div>
+          <div class="calendar-grid">
+            <!-- 요일 헤더 -->
+            <div class="calendar-day calendar-header-day">일</div>
+            <div class="calendar-day calendar-header-day">월</div>
+            <div class="calendar-day calendar-header-day">화</div>
+            <div class="calendar-day calendar-header-day">수</div>
+            <div class="calendar-day calendar-header-day">목</div>
+            <div class="calendar-day calendar-header-day">금</div>
+            <div class="calendar-day calendar-header-day">토</div>
 
-      <div class="call-btn">안내전화</div>
+            <!-- 달력 날짜들은 JavaScript로 동적 생성 -->
+          </div>
+        </div>
 
-      <div class="map-container" id="map">
-        <!-- 네이버 또는 카카오 지도가 여기에 로드됨 -->
-        <div id="map" style="width:100%;height:600px;"></div>
-      </div>
+        <div class="countdown" id="countdown-text">
+          OO, OO의 결혼식이 00일 남았습니다
+        </div>
+      </section>
 
-      <div class="navigation">
-        <ul>
-          <li>
-            <a href="javascript:TMAP.send('대구광역시 달서구 구마로 52', 128.5333183832368, 35.83689801074684);"><img
-                src="./images/tmap.png" draggable="false"> 티맵</a>
-          </li>
-          <li>
-            <a href="javascript:startNavigation('대구광역시 달서구 구마로 52', 128.5333183832368, 35.83689801074684)"><img
-                src="./images/kakaonav.png" draggable="false"> 카카오내비</a>
-          </li>
-          <li>
-            <a href="https://m.map.naver.com/search2/search.nhn?query=대구광역시 달서구 구마로 52" target="_blank"><img
-                src="./images/navermap.jpg" draggable="false"> 네이버 지도</a>
-          </li>
-        </ul>
-      </div>
+      <!-- 갤러리 섹션 -->
+      <section id="gallery">
+        <h2 class="section-title">GALLERY</h2>
+        <div class="gallery-grid">
+          <!-- 갤러리 이미지들은 JavaScript로 동적 생성 -->
+        </div>
+      </section>
 
-      <!-- <div id="area11" idx="11" class="etcarea">
+      <!-- 오시는 길 섹션 -->
+      <section id="location">
+        <h2 class="section-title">오시는 길</h2>
+
+        <div class="venue-address">
+          대구광역시 달서구 구마로 52(본동)
+          <br />
+          파라다이스 웨딩컨벤션 3F 스텔라홀
+        </div>
+
+        <div class="call-btn">안내전화</div>
+
+        <div class="map-container" id="map">
+          <!-- 네이버 또는 카카오 지도가 여기에 로드됨 -->
+          <div id="map" style="width: 100%; height: 600px"></div>
+        </div>
+
+        <div class="navigation">
+          <ul>
+            <li>
+              <a
+                href="javascript:TMAP.send('대구광역시 달서구 구마로 52', 128.5333183832368, 35.83689801074684);"
+                ><img src="./images/tmap.png" draggable="false" /> 티맵</a
+              >
+            </li>
+            <li>
+              <a
+                href="javascript:startNavigation('대구광역시 달서구 구마로 52', 128.5333183832368, 35.83689801074684)"
+                ><img src="./images/kakaonav.png" draggable="false" />
+                카카오내비</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://m.map.naver.com/search2/search.nhn?query=대구광역시 달서구 구마로 52"
+                target="_blank"
+                ><img src="./images/navermap.jpg" draggable="false" /> 네이버
+                지도</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- <div id="area11" idx="11" class="etcarea">
         <div class="etc_info">
           <ul>
             <li>
@@ -969,696 +1027,746 @@
           </ul>
         </div>
       </div> -->
-    </section>
+      </section>
 
-    <!-- 마음 전하실 곳 섹션 -->
-    <section id="gifts" style="display: none;">
-      <h2 class="section-title">마음 전하실 곳</h2>
+      <!-- 마음 전하실 곳 섹션 -->
+      <section id="gifts">
+        <h2 class="section-title">마음 전하실 곳</h2>
+        <p class="gifts-text">
+          참석이 어려우신 분들을 위해 기재했습니다<br />
+          너그러운 마음으로 양해 부탁드립니다
+        </p>
 
-      <!-- 신랑측 계좌 아코디언 -->
-      <div class="accordion">
-        <div class="accordion-header" data-target="groom-accounts">
-          <span>신랑측 계좌번호</span>
-          <i class="fa-solid fa-chevron-down accordion-icon"></i>
-        </div>
-        <div class="accordion-content" id="groom-accounts">
-          <div class="accordion-inner">
-            <div class="account-info">
-              <div class="account-name">신랑</div>
-              <div class="account-number">카카오뱅크 (예금주 : 서희원)
-                <div>
-                  <span id="account1">3333-06-9262114</span>
-                  <button class="copy-btn" onclick="copyAccount('account1')">계좌번호 복사</button>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="account-info">
-            <div class="account-name">신랑 아버지</div>
-            <div class="account-number">신한은행 987-654-32109</div>
+        <!-- 신랑측 계좌 아코디언 -->
+        <div class="accordion">
+          <div class="accordion-header" data-target="groom-accounts">
+            <span>신랑측 계좌번호</span>
+            <i class="fa-solid fa-chevron-down accordion-icon"></i>
           </div>
-          <div class="account-info">
-            <div class="account-name">신랑 어머니</div>
-            <div class="account-number">우리은행 111-222-33333</div>
-          </div> -->
-          </div>
-        </div>
-      </div>
-
-      <!-- 신부측 계좌 아코디언 -->
-      <div class="accordion">
-        <div class="accordion-header" data-target="bride-accounts">
-          <span>신부측 계좌번호</span>
-          <i class="fa-solid fa-chevron-down accordion-icon"></i>
-        </div>
-        <div class="accordion-content" id="bride-accounts">
-          <div class="accordion-inner">
-            <div class="account-info">
-              <div class="account-name">신부</div>
-              <div class="account-number">
-                카카오뱅크 (예금주 : 우윤하)
-                <div>
-                  <span id="account4">3333219749727</span>
-                  <button class="copy-btn" onclick="copyAccount('account4')">계좌번호 복사</button>
+          <div class="accordion-content" id="groom-accounts">
+            <div class="accordion-inner">
+              <div class="account-info">
+                <div class="account-name">신랑</div>
+                <div class="account-number">
+                  <b>카카오뱅크</b> [예금주 : 서희원]
+                  <div>
+                    <span id="account1">3333-06-9262114</span>
+                    <button class="copy-btn" onclick="copyAccount('account1')">
+                      계좌번호 복사
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="account-info">
-              <div class="account-name">신부혼주 계좌</div>
-              <div class="account-number">
-                NH농협 (예금주 : 우창택)
-                <div>
-                  <span id="account5">89302296296</span>
-                  <button class="copy-btn" onclick="copyAccount('account5')">계좌번호 복사</button>
+              <div class="account-info">
+                <div class="account-name">신랑 아버지</div>
+                <div class="account-number">
+                  우리은행 [예금주 : 서영석]
+                  <div>
+                    <span id="account2">1002-858-672691</span>
+                    <button class="copy-btn" onclick="copyAccount('account2')">
+                      계좌번호 복사
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="account-info">
-              <div class="account-name">신부혼주 계좌</div>
-              <div class="account-number">
-                NH농협 (예금주 : 남현미)
-                <div>
-                  <span id="account6">89302296056</span>
-                  <button class="copy-btn" onclick="copyAccount('account6')">계좌번호 복사</button>
+              <div class="account-info">
+                <div class="account-name">신랑 어머니</div>
+                <div class="account-number">
+                  대구은행(iM뱅크) [예금주 : 구은주]
+                  <div>
+                    <span id="account3">049-08-004078</span>
+                    <button class="copy-btn" onclick="copyAccount('account3')">
+                      계좌번호 복사
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- 신부측 계좌 아코디언 -->
+        <div class="accordion">
+          <div class="accordion-header" data-target="bride-accounts">
+            <span>신부측 계좌번호</span>
+            <i class="fa-solid fa-chevron-down accordion-icon"></i>
+          </div>
+          <div class="accordion-content" id="bride-accounts">
+            <div class="accordion-inner">
+              <div class="account-info">
+                <div class="account-name">신부</div>
+                <div class="account-number">
+                  카카오뱅크 [예금주 : 우윤하]
+                  <div>
+                    <span id="account4">3333-24-7168059</span>
+                    <button class="copy-btn" onclick="copyAccount('account4')">
+                      계좌번호 복사
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="account-info">
+                <div class="account-name">신부 아버지</div>
+                <div class="account-number">
+                  국민은행(KB) [예금주 : 우창택]
+                  <div>
+                    <span id="account5">642-21-0118-684</span>
+                    <button class="copy-btn" onclick="copyAccount('account5')">
+                      계좌번호 복사
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 공유하기 섹션 -->
+      <section id="share">
+        <h2 class="section-title">공유하기</h2>
+
+        <div class="share-btns">
+          <div class="share-btn" id="copy-link">
+            <div class="share-icon">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <span class="share-text">링크 복사</span>
+          </div>
+
+          <div class="share-btn" id="share-kakao">
+            <div class="share-icon">
+              <!-- <i class="fa-solid fa-comment"></i> -->
+              <a id="kakaotalk-sharing-btn" href="javascript:;">
+                <img
+                  src="./images/kakaotalk_sharing_btn_medium.png"
+                  alt="카카오톡 공유 보내기 버튼"
+                />
+              </a>
+            </div>
+            <span class="share-text">카카오톡 공유</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 푸터 섹션 -->
+      <footer>
+        <p>&copy; 2025 made by won</p>
+      </footer>
+
+      <!-- 연락처 모달 -->
+      <div class="modal" id="contact-modal">
+        <div class="modal-content">
+          <div class="close-modal" id="close-contact-modal">
+            <i class="fa-solid fa-times"></i>
+          </div>
+          <h3 class="modal-title">연락처</h3>
+          <div class="contact-list">
+            <p><b>신랑측</b></p>
+            <div class="contact-person">
+              <div class="person-name">신랑 서희원</div>
+              <div class="contact-actions">
+                <div class="contact-action call-action" data-tel="01089563756">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-action sms-action" data-tel="01089563756">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-person">
+              <div class="person-name">신랑 아버지 서영석</div>
+              <div class="contact-actions">
+                <div class="contact-action call-action" data-tel="01035043756">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-action sms-action" data-tel="01035043756">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-person">
+              <div class="person-name">신랑 어머니 구은주</div>
+              <div class="contact-actions">
+                <div class="contact-action call-action" data-tel="01096535556">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-action sms-action" data-tel="01096535556">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+
+            <p><b>신부측</b></p>
+            <div class="contact-person">
+              <div class="person-name">신부 우윤하</div>
+              <div class="contact-actions">
+                <div class="contact-action call-action" data-tel="01077487129">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-action sms-action" data-tel="01077487129">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-person">
+              <div class="person-name">신부 아버지 우창택</div>
+              <div class="contact-actions">
+                <div class="contact-action call-action" data-tel="01077487129">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-action sms-action" data-tel="01077487129">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-person">
+              <div class="person-name">신부 어머니 남현미</div>
+              <div class="contact-actions">
+                <div class="contact-action call-action" data-tel="01077487129">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-action sms-action" data-tel="01077487129">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <!-- 공유하기 섹션 -->
-    <section id="share">
-      <h2 class="section-title">공유하기</h2>
-
-      <div class="share-btns">
-        <div class="share-btn" id="copy-link">
-          <div class="share-icon">
-            <i class="fa-solid fa-link"></i>
+      <!-- 갤러리 모달 -->
+      <div class="modal" id="gallery-modal">
+        <div class="modal-content">
+          <div class="close-modal" id="close-gallery-modal">
+            <i class="fa-solid fa-times"></i>
           </div>
-          <span class="share-text">링크 복사</span>
-        </div>
 
-        <div class="share-btn" id="share-kakao">
-          <div class="share-icon">
-            <!-- <i class="fa-solid fa-comment"></i> -->
-            <a id="kakaotalk-sharing-btn" href="javascript:;">
-              <img src="./images/kakaotalk_sharing_btn_medium.png"
-                alt="카카오톡 공유 보내기 버튼" />
-            </a>
-          </div>
-          <span class="share-text">카카오톡 공유</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- 푸터 섹션 -->
-    <footer>
-      <p>&copy; 2025 made by won</p>
-    </footer>
-
-    <!-- 연락처 모달 -->
-    <div class="modal" id="contact-modal">
-      <div class="modal-content">
-        <div class="close-modal" id="close-contact-modal">
-          <i class="fa-solid fa-times"></i>
-        </div>
-        <h3 class="modal-title">연락처</h3>
-        <div class="contact-list">
-          <p><b>신랑측</b></p>
-          <div class="contact-person">
-            <div class="person-name">신랑 서희원</div>
-            <div class="contact-actions">
-              <div class="contact-action call-action" data-tel="01089563756">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div class="contact-action sms-action" data-tel="01089563756">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
+          <!-- Swiper 슬라이더 -->
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <!-- 슬라이드는 JavaScript로 동적 생성 -->
             </div>
-          </div>
-
-          <div class="contact-person">
-            <div class="person-name">신랑 아버지 서영석</div>
-            <div class="contact-actions">
-              <div class="contact-action call-action" data-tel="01035043756">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div class="contact-action sms-action" data-tel="01035043756">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-person">
-            <div class="person-name">신랑 어머니 구은주</div>
-            <div class="contact-actions">
-              <div class="contact-action call-action" data-tel="01096535556">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div class="contact-action sms-action" data-tel="01096535556">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-            </div>
-          </div>
-
-          <p><b>신부측</b></p>
-          <div class="contact-person">
-            <div class="person-name">신부 우윤하</div>
-            <div class="contact-actions">
-              <div class="contact-action call-action" data-tel="01077487129">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div class="contact-action sms-action" data-tel="01077487129">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-person">
-            <div class="person-name">신부 아버지 우창택</div>
-            <div class="contact-actions">
-              <div class="contact-action call-action" data-tel="01077487129">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div class="contact-action sms-action" data-tel="01077487129">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-person">
-            <div class="person-name">신부 어머니 남현미</div>
-            <div class="contact-actions">
-              <div class="contact-action call-action" data-tel="01077487129">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div class="contact-action sms-action" data-tel="01077487129">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-            </div>
+            <div class="swiper-pagination" style="display: none;"></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 갤러리 모달 -->
-    <div class="modal" id="gallery-modal">
-      <div class="modal-content">
-        <div class="close-modal" id="close-gallery-modal">
-          <i class="fa-solid fa-times"></i>
-        </div>
+      <!-- 토스트 알림 -->
+      <div class="toast" id="toast">링크가 복사되었습니다</div>
 
-        <!-- Swiper 슬라이더 -->
-        <div class="swiper">
-          <div class="swiper-wrapper">
-            <!-- 슬라이드는 JavaScript로 동적 생성 -->
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 토스트 알림 -->
-    <div class="toast" id="toast">링크가 복사되었습니다</div>
-
-
-
-    <script>
-      setTimeout(function () {
-        // 로딩 화면 페이드 아웃
-        document.getElementById('loading-screen').style.display = 'none';
-
-        // 메인 콘텐츠 표시
-        // document.querySelector('.main-content').style.opacity = '1';
-
-        // 로딩 화면 완전히 제거 (트랜지션 효과 후)
+      <script>
         setTimeout(function () {
-          document.getElementById('loading-screen').style.display = 'none';
-        }, 500);
-      }, 1500);
+          // 로딩 화면 페이드 아웃
+          document.getElementById("loading-screen").style.display = "none";
 
+          // 메인 콘텐츠 표시
+          // document.querySelector('.main-content').style.opacity = '1';
 
-      let targetYear = 2025;
-      let targetMonth = 11; //월
-      let targetDay = 22; //일
-      let targetHour = 14 //시
-      let targetMinute = 30 //분
+          // 로딩 화면 완전히 제거 (트랜지션 효과 후)
+          setTimeout(function () {
+            document.getElementById("loading-screen").style.display = "none";
+          }, 500);
+        }, 1500);
 
+        let targetYear = 2025;
+        let targetMonth = 11; //월
+        let targetDay = 22; //일
+        let targetHour = 14; //시
+        let targetMinute = 30; //분
 
-      // 문서 로드 후 실행
-      $(document).ready(function () {
-        // 카카오 설정
-        Kakao.init('c6cfc1a93ff9b71269c37ed7e2d80feb');
+        // 문서 로드 후 실행
+        $(document).ready(function () {
+          // 카카오 설정
+          Kakao.init("c6cfc1a93ff9b71269c37ed7e2d80feb");
 
-        Kakao.Share.createDefaultButton({
-          container: '#kakaotalk-sharing-btn',
-          objectType: 'feed',
-          content: {
-            title: '희원 ♡ 윤하 결혼합니다',
-            description: '2025-11-22 토요일 오후 2시 30분\r\n모바일청첩장',
-            imageUrl:
-              'https://hiparee.github.io/wedding/images/main.jpg',
-            link: {
-              // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-              mobileWebUrl: 'https://hiparee.github.io/wedding',
-              webUrl: 'https://hiparee.github.io/wedding',
-            },
-          },
-          buttons: [
-            {
-              title: '자세히 보기',
+          Kakao.Share.createDefaultButton({
+            container: "#kakaotalk-sharing-btn",
+            objectType: "feed",
+            content: {
+              title: "희원 ♡ 윤하 결혼합니다",
+              description: "2025-11-22 토요일 오후 2시 30분\r\n모바일청첩장",
+              imageUrl: "https://hiparee.github.io/wedding/images/main.jpg",
               link: {
-                mobileWebUrl: 'https://hiparee.github.io/wedding',
-                webUrl: 'https://hiparee.github.io/wedding',
+                // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+                mobileWebUrl: "https://hiparee.github.io/wedding",
+                webUrl: "https://hiparee.github.io/wedding",
               },
             },
-            // {
-            //   title: '앱으로 보기',
-            //   link: {
-            //     mobileWebUrl: 'https://developers.kakao.com',
-            //     webUrl: 'https://developers.kakao.com',
-            //   },
-            // },
-          ],
+            buttons: [
+              {
+                title: "자세히 보기",
+                link: {
+                  mobileWebUrl: "https://hiparee.github.io/wedding",
+                  webUrl: "https://hiparee.github.io/wedding",
+                },
+              },
+              // {
+              //   title: '앱으로 보기',
+              //   link: {
+              //     mobileWebUrl: 'https://developers.kakao.com',
+              //     webUrl: 'https://developers.kakao.com',
+              //   },
+              // },
+            ],
+          });
+
+          // 티맵
+          var TMAP = {};
+
+          window.TMAP = window.TMAP || TMAP;
+
+          var userAgent = navigator.userAgent.toLocaleLowerCase();
+          if (userAgent.search("android") > -1) {
+            TMAP.os = "android";
+          } else if (
+            userAgent.search("iphone") > -1 ||
+            userAgent.search("ipod") > -1 ||
+            userAgent.search("ipad") > -1
+          ) {
+            TMAP.os = "ios";
+          } else {
+            TMAP.os = "etc";
+          }
+
+          var app = {
+            baseUrl: {
+              ios: "tmap://",
+              android: "tmap://A1",
+              etc: "tmap://",
+            },
+            searchUrl: {
+              ios: "tmap://?search=",
+              android: "tmap://search?name=",
+              etc: "tmap://",
+            },
+            store: {
+              android:
+                "https://play.google.com/store/apps/details?id=com.skt.tmap.ku&hl=ko",
+              ios: "https://itunes.apple.com/app/id431589174",
+              etc: "http://www.tmap.co.kr",
+            },
+          };
+
+          TMAP.send = function (dest, lng, lat) {
+            var appKey = "tLTsLqoAus20wdtbLkAnI8tCkZqLrAXl7fXowc3c"; //hj
+            // var appKey = "R17FbiGDIM8ynO7BSwN0Q1mkU2KByCAQ86iqA8at"; //hw
+
+            window.location.href =
+              "https://apis.openapi.sk.com/tmap/app/routes?appKey=" +
+              appKey +
+              "&name=" +
+              dest +
+              "&lon=" +
+              lng +
+              "&lat=" +
+              lat;
+          };
+
+          // 갤러리 이미지 배열
+
+          // 달력 생성
+          createCalendar();
+
+          // 갤러리 이미지 생성
+          createGallery();
+
+          // 카카오 지도 초기화
+          // initMap();
+
+          // D-day 카운트다운 초기화
+          updateCountdown();
+
+          // 이벤트 리스너 설정
+          setupEventListeners();
+
+          // 아코디언 초기화
+          initAccordions();
         });
 
-        // 티맵
-        var TMAP = {};
-
-        window.TMAP = window.TMAP || TMAP;
-
-        var userAgent = navigator.userAgent.toLocaleLowerCase();
-        if (userAgent.search("android") > -1) {
-          TMAP.os = "android";
-        } else if (userAgent.search("iphone") > -1 || userAgent.search("ipod") > -1 || userAgent.search("ipad") > -1) {
-          TMAP.os = "ios";
-        } else {
-          TMAP.os = "etc";
-        }
-
-        var app = {
-          baseUrl: {
-            ios: "tmap://",
-            android: "tmap://A1",
-            etc: "tmap://"
-          },
-          searchUrl: {
-            ios: "tmap://?search=",
-            android: "tmap://search?name=",
-            etc: "tmap://"
-          },
-          store: {
-            android: "https://play.google.com/store/apps/details?id=com.skt.tmap.ku&hl=ko",
-            ios: "https://itunes.apple.com/app/id431589174",
-            etc: "http://www.tmap.co.kr"
-          }
-        };
-
-        TMAP.send = function (dest, lng, lat) {
-          var appKey = "tLTsLqoAus20wdtbLkAnI8tCkZqLrAXl7fXowc3c"; //hj
-          // var appKey = "R17FbiGDIM8ynO7BSwN0Q1mkU2KByCAQ86iqA8at"; //hw
-          
-          window.location.href = "https://apis.openapi.sk.com/tmap/app/routes?appKey=" + appKey + "&name=" + dest + "&lon=" + lng + "&lat=" + lat;
-        };
-        
-
-        // 갤러리 이미지 배열
-        
-
-        // 달력 생성
-        createCalendar();
-
-        // 갤러리 이미지 생성
-        createGallery();
-
-        // 카카오 지도 초기화
-        // initMap();
-
-        // D-day 카운트다운 초기화
-        updateCountdown();
-
-        // 이벤트 리스너 설정
-        setupEventListeners();
-
-        // 아코디언 초기화
-        initAccordions();
-      });
-
-      function startNavigation(address, x, y) {
+        function startNavigation(address, x, y) {
           Kakao.Navi.start({
             name: address,
             x: x,
             y: y,
-            coordType: 'wgs84'
+            coordType: "wgs84",
           });
         }
 
+        // 달력 생성 함수
+        function createCalendar() {
+          const weddingDate = new Date(targetYear, targetMonth - 1, targetDay); // 11월은 10 (0부터 시작)
+          const year = weddingDate.getFullYear();
+          const month = weddingDate.getMonth();
 
-      // 달력 생성 함수
-      function createCalendar() {
-        const weddingDate = new Date(targetYear, targetMonth - 1, targetDay); // 11월은 10 (0부터 시작)
-        const year = weddingDate.getFullYear();
-        const month = weddingDate.getMonth();
+          // 해당 월의 첫째 날과 마지막 날 구하기
+          const firstDay = new Date(year, month, 1);
+          const lastDay = new Date(year, month + 1, 0);
 
-        // 해당 월의 첫째 날과 마지막 날 구하기
-        const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
+          // 달력 시작 위치 계산 (첫째 날의 요일)
+          const startPosition = firstDay.getDay();
 
-        // 달력 시작 위치 계산 (첫째 날의 요일)
-        const startPosition = firstDay.getDay();
+          // 달력 그리드에 날짜 추가
+          const calendarGrid = document.querySelector(".calendar-grid");
 
-        // 달력 그리드에 날짜 추가
-        const calendarGrid = document.querySelector('.calendar-grid');
-
-        // 빈 칸 추가 (첫째 날 이전)
-        for (let i = 0; i < startPosition; i++) {
-          const emptyDay = document.createElement('div');
-          emptyDay.className = 'calendar-day';
-          calendarGrid.appendChild(emptyDay);
-        }
-
-        // 날짜 추가
-        for (let day = 1; day <= lastDay.getDate(); day++) {
-          const dayElement = document.createElement('div');
-          dayElement.textContent = day;
-          dayElement.className = 'calendar-day';
-
-          // 주말 스타일 적용
-          const dayOfWeek = new Date(year, month, day).getDay();
-          if (dayOfWeek === 0 || dayOfWeek === 6) {
-            dayElement.classList.add('weekend');
+          // 빈 칸 추가 (첫째 날 이전)
+          for (let i = 0; i < startPosition; i++) {
+            const emptyDay = document.createElement("div");
+            emptyDay.className = "calendar-day";
+            calendarGrid.appendChild(emptyDay);
           }
 
-          // 결혼식 날짜 스타일 적용
-          if (day === weddingDate.getDate()) {
-            dayElement.classList.add('wedding-day');
+          // 날짜 추가
+          for (let day = 1; day <= lastDay.getDate(); day++) {
+            const dayElement = document.createElement("div");
+            dayElement.textContent = day;
+            dayElement.className = "calendar-day";
+
+            // 주말 스타일 적용
+            const dayOfWeek = new Date(year, month, day).getDay();
+            if (dayOfWeek === 0 || dayOfWeek === 6) {
+              dayElement.classList.add("weekend");
+            }
+
+            // 결혼식 날짜 스타일 적용
+            if (day === weddingDate.getDate()) {
+              dayElement.classList.add("wedding-day");
+            }
+
+            calendarGrid.appendChild(dayElement);
+          }
+        }
+
+        // 갤러리 이미지 생성 함수
+        function createGallery() {
+          const galleryGrid = document.querySelector(".gallery-grid");
+          const galleryImages = [
+            
+             "./images/06.jpg",
+             "./images/01.jpg",
+            // "./images/07.jpg",
+
+            "./images/12.jpg",
+            "./images/13.jpg",
+            "./images/14.jpg",
+            "./images/15.jpg",
+
+
+            "./images/02.jpg",
+            "./images/03.jpg",
+            "./images/04.jpg",
+            "./images/05.jpg",
+           
+            "./images/08.jpg",
+            "./images/09.jpg",
+            "./images/10.jpg",
+            "./images/11.jpg",
+            
+            "./images/16.jpg",
+            "./images/17.jpg",
+            "./images/18.jpg",
+            "./images/19.jpg",
+            "./images/20.jpg",
+            "./images/21.jpg",
+            "./images/22.jpg",
+            "./images/23.jpg",
+          ];
+
+          // 갤러리 아이템 추가
+          galleryImages.forEach((src, index) => {
+            const galleryItem = document.createElement("div");
+            galleryItem.className = "gallery-item";
+            galleryItem.dataset.index = index;
+
+            const img = document.createElement("img");
+            img.className = "gallery-img";
+            img.src = src;
+            img.alt = `웨딩 갤러리 이미지 ${index + 1}`;
+
+            galleryItem.appendChild(img);
+            galleryGrid.appendChild(galleryItem);
+          });
+
+          // Swiper 슬라이더 초기화
+          initGallerySwiper(galleryImages);
+        }
+
+        // 갤러리 Swiper 초기화 함수
+        function initGallerySwiper(images) {
+          // Swiper 슬라이더 컨테이너
+          const swiperWrapper = document.querySelector(".swiper-wrapper");
+
+          // 슬라이드 추가
+          images.forEach((src) => {
+            const slide = document.createElement("div");
+            slide.className = "swiper-slide";
+
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "웨딩 갤러리 이미지";
+
+            slide.appendChild(img);
+            swiperWrapper.appendChild(slide);
+          });
+        }
+
+        function copyAccount(accountId) {
+          // 계좌번호 텍스트 가져오기
+          const accountText = document.getElementById(accountId).innerText;
+
+          // 임시 textarea 요소 생성하여 복사 기능 구현
+          const textarea = document.createElement("textarea");
+          textarea.value = accountText;
+          textarea.style.position = "fixed"; // 화면 밖으로 위치시킴
+          document.body.appendChild(textarea);
+          textarea.select();
+
+          try {
+            // 복사 실행
+            document.execCommand("copy");
+
+            // 복사 버튼에 성공 표시
+            const btn = document.querySelector(
+              `button[onclick="copyAccount('${accountId}')"]`
+            );
+            const originalText = btn.innerText;
+
+            btn.innerText = "복사완료";
+            btn.classList.add("copy-success");
+
+            // 2초 후 원래 상태로 복원
+            setTimeout(() => {
+              btn.innerText = originalText;
+              btn.classList.remove("copy-success");
+            }, 2000);
+          } catch (err) {
+            console.error("계좌번호 복사에 실패했습니다:", err);
+            alert("계좌번호 복사에 실패했습니다.");
           }
 
-          calendarGrid.appendChild(dayElement);
-        }
-      }
-
-      // 갤러리 이미지 생성 함수
-      function createGallery() {
-        const galleryGrid = document.querySelector('.gallery-grid');
-        const galleryImages = [
-          './images/01.jpg',
-          './images/02.jpg',
-          './images/03.jpg',
-          './images/04.jpg',
-          './images/05.jpg',
-          './images/06.jpg',
-          './images/07.jpg',
-          './images/08.jpg',
-          './images/09.jpg',
-          './images/10.jpg',
-          './images/11.jpg',
-          './images/12.jpg',
-          './images/13.jpg',
-          './images/14.jpg',
-          './images/15.jpg',
-          './images/16.jpg',
-          './images/17.jpg',
-          './images/18.jpg',
-          './images/19.jpg',
-          './images/20.jpg',
-          './images/21.jpg',
-          './images/22.jpg',
-          './images/23.jpg',
-        ];
-
-        // 갤러리 아이템 추가
-        galleryImages.forEach((src, index) => {
-          const galleryItem = document.createElement('div');
-          galleryItem.className = 'gallery-item';
-          galleryItem.dataset.index = index;
-
-          const img = document.createElement('img');
-          img.className = 'gallery-img';
-          img.src = src;
-          img.alt = `웨딩 갤러리 이미지 ${index + 1}`;
-
-          galleryItem.appendChild(img);
-          galleryGrid.appendChild(galleryItem);
-        });
-
-        // Swiper 슬라이더 초기화
-        initGallerySwiper(galleryImages);
-      }
-
-      // 갤러리 Swiper 초기화 함수
-      function initGallerySwiper(images) {
-        // Swiper 슬라이더 컨테이너
-        const swiperWrapper = document.querySelector('.swiper-wrapper');
-
-        // 슬라이드 추가
-        images.forEach((src) => {
-          const slide = document.createElement('div');
-          slide.className = 'swiper-slide';
-
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = '웨딩 갤러리 이미지';
-
-          slide.appendChild(img);
-          swiperWrapper.appendChild(slide);
-        });
-      }
-
-
-
-      function copyAccount(accountId) {
-        // 계좌번호 텍스트 가져오기
-        const accountText = document.getElementById(accountId).innerText;
-
-        // 임시 textarea 요소 생성하여 복사 기능 구현
-        const textarea = document.createElement('textarea');
-        textarea.value = accountText;
-        textarea.style.position = 'fixed';  // 화면 밖으로 위치시킴
-        document.body.appendChild(textarea);
-        textarea.select();
-
-        try {
-          // 복사 실행
-          document.execCommand('copy');
-
-          // 복사 버튼에 성공 표시
-          const btn = document.querySelector(`button[onclick="copyAccount('${accountId}')"]`);
-          const originalText = btn.innerText;
-
-          btn.innerText = '복사완료';
-          btn.classList.add('copy-success');
-
-          // 2초 후 원래 상태로 복원
-          setTimeout(() => {
-            btn.innerText = originalText;
-            btn.classList.remove('copy-success');
-          }, 2000);
-
-        } catch (err) {
-          console.error('계좌번호 복사에 실패했습니다:', err);
-          alert('계좌번호 복사에 실패했습니다.');
+          // 임시 요소 제거
+          document.body.removeChild(textarea);
         }
 
-        // 임시 요소 제거
-        document.body.removeChild(textarea);
-      }
+        // D-day 카운트다운 업데이트 함수
+        function updateCountdown() {
+          const coupleName = "희원♥윤하";
 
+          const weddingDate = new Date(
+            targetYear,
+            targetMonth - 1,
+            targetDay,
+            targetHour,
+            targetMinute,
+            0
+          );
+          const today = new Date();
 
-      // D-day 카운트다운 업데이트 함수
-      function updateCountdown() {
-        const coupleName = '희원♥윤하';
+          // 날짜만 비교하기 위해 시간을 초기화한 새로운 날짜 객체 생성
+          const todayDate = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+          );
+          const weddingDateOnly = new Date(
+            weddingDate.getFullYear(),
+            weddingDate.getMonth(),
+            weddingDate.getDate()
+          );
 
-        const weddingDate = new Date(targetYear, targetMonth - 1, targetDay, targetHour, targetMinute, 0);
-        const today = new Date();
-        
-        // 날짜만 비교하기 위해 시간을 초기화한 새로운 날짜 객체 생성
-        const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        const weddingDateOnly = new Date(weddingDate.getFullYear(), weddingDate.getMonth(), weddingDate.getDate());
-        
-        // 날짜 간의 차이 계산 (밀리초)
-        const diffTime = weddingDateOnly.getTime() - todayDate.getTime();
-        // 일 단위로 변환
-        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-        
-        // D-day 텍스트 업데이트
-        const countdownText = document.getElementById('countdown-text');
-        if (diffDays > 0) {
-          countdownText.textContent = `${coupleName}의 결혼식이 ${diffDays}일 남았습니다`;
-        } else if (diffDays === 0) {
-          countdownText.textContent = `오늘이 ${coupleName}의 결혼식입니다`;
-        } else {
-          countdownText.textContent = `${coupleName}의 결혼식이 ${Math.abs(diffDays)}일 지났습니다`;
-        }
-      }
+          // 날짜 간의 차이 계산 (밀리초)
+          const diffTime = weddingDateOnly.getTime() - todayDate.getTime();
+          // 일 단위로 변환
+          const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-      // 이벤트 리스너 설정 함수
-      function setupEventListeners() {
-        // 연락처 모달 표시
-        $('#show-contact-modal').click(function () {
-          $('#contact-modal').css('display', 'flex').hide().fadeIn(300);
-        });
-
-        // 연락처 모달 닫기
-        $('#close-contact-modal').click(function () {
-          $('#contact-modal').fadeOut(300);
-        });
-
-        // 갤러리 이미지 클릭 시 모달 표시
-        $('.gallery-item').click(function () {
-          const index = $(this).data('index');
-
-          console.log(index);
-
-          // Swiper 인스턴스 생성 또는 업데이트
-          if (window.gallerySwiper) {
-            window.gallerySwiper.slideTo(index + 1, 0);
+          // D-day 텍스트 업데이트
+          const countdownText = document.getElementById("countdown-text");
+          if (diffDays > 0) {
+            countdownText.textContent = `${coupleName}의 결혼식이 ${diffDays}일 남았습니다`;
+          } else if (diffDays === 0) {
+            countdownText.textContent = `오늘이 ${coupleName}의 결혼식입니다`;
           } else {
-            window.gallerySwiper = new Swiper('.swiper', {
-              initialSlide: index,
-              loop: true,
-              pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-              }
-            });
+            countdownText.textContent = `${coupleName}의 결혼식이 ${Math.abs(
+              diffDays
+            )}일 지났습니다`;
           }
+        }
 
-          $('#gallery-modal').css('display', 'flex').hide().fadeIn(300);
-        });
+        // 이벤트 리스너 설정 함수
+        function setupEventListeners() {
+          // 연락처 모달 표시
+          $("#show-contact-modal").click(function () {
+            $("#contact-modal").css("display", "flex").hide().fadeIn(300);
+          });
 
-        // 갤러리 모달 닫기
-        $('#close-gallery-modal').click(function () {
-          $('#gallery-modal').fadeOut(300);
-        });
+          // 연락처 모달 닫기
+          $("#close-contact-modal").click(function () {
+            $("#contact-modal").fadeOut(300);
+          });
 
-        // 링크 복사 버튼
-        $('#copy-link').click(function () {
-          const link = window.location.href;
-          navigator.clipboard.writeText(link)
-            .then(() => showToast('링크가 복사되었습니다'))
-            .catch(() => {
-              // 클립보드 API를 지원하지 않는 경우 대체 방법
-              const tempInput = document.createElement('input');
-              tempInput.value = link;
-              document.body.appendChild(tempInput);
-              tempInput.select();
-              document.execCommand('copy');
-              document.body.removeChild(tempInput);
-              showToast('링크가 복사되었습니다');
-            });
-        });
+          // 갤러리 이미지 클릭 시 모달 표시
+          $(".gallery-item").click(function () {
+            const index = $(this).data("index");
 
-        // 카카오톡 공유 버튼
-        $('#share-kakao').click(function () {
-          if (typeof Kakao !== 'undefined') {
-            Kakao.Link.sendDefault({
-              objectType: 'feed',
-              content: {
-                title: '신랑이름 & 신부이름의 결혼식에 초대합니다',
-                description: '2025년 11월 22일 토요일 오후 2시 30분',
-                imageUrl: 'https://example.com/wedding.jpg', // 실제 이미지 URL로 교체 필요
-                link: {
-                  mobileWebUrl: window.location.href,
-                  webUrl: window.location.href
-                }
-              },
-              buttons: [
-                {
-                  title: '청첩장 보기',
+            console.log(index);
+
+            // Swiper 인스턴스 생성 또는 업데이트
+            if (window.gallerySwiper) {
+              window.gallerySwiper.slideTo(index + 1, 0);
+            } else {
+              window.gallerySwiper = new Swiper(".swiper", {
+                initialSlide: index,
+                loop: true,
+                pagination: {
+                  el: ".swiper-pagination",
+                  clickable: true,
+                },
+              });
+            }
+
+            $("#gallery-modal").css("display", "flex").hide().fadeIn(300);
+          });
+
+          // 갤러리 모달 닫기
+          $("#close-gallery-modal").click(function () {
+            $("#gallery-modal").fadeOut(300);
+          });
+
+          // 링크 복사 버튼
+          $("#copy-link").click(function () {
+            const link = window.location.href;
+            navigator.clipboard
+              .writeText(link)
+              .then(() => showToast("링크가 복사되었습니다"))
+              .catch(() => {
+                // 클립보드 API를 지원하지 않는 경우 대체 방법
+                const tempInput = document.createElement("input");
+                tempInput.value = link;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                showToast("링크가 복사되었습니다");
+              });
+          });
+
+          // 카카오톡 공유 버튼
+          $("#share-kakao").click(function () {
+            if (typeof Kakao !== "undefined") {
+              Kakao.Link.sendDefault({
+                objectType: "feed",
+                content: {
+                  title: "신랑이름 & 신부이름의 결혼식에 초대합니다",
+                  description: "2025년 11월 22일 토요일 오후 2시 30분",
+                  imageUrl: "https://example.com/wedding.jpg", // 실제 이미지 URL로 교체 필요
                   link: {
                     mobileWebUrl: window.location.href,
-                    webUrl: window.location.href
-                  }
-                }
-              ]
-            });
-          } else {
-            showToast('카카오톡 공유 기능을 사용할 수 없습니다');
-          }
-        });
+                    webUrl: window.location.href,
+                  },
+                },
+                buttons: [
+                  {
+                    title: "청첩장 보기",
+                    link: {
+                      mobileWebUrl: window.location.href,
+                      webUrl: window.location.href,
+                    },
+                  },
+                ],
+              });
+            } else {
+              showToast("카카오톡 공유 기능을 사용할 수 없습니다");
+            }
+          });
 
-        // 안내전화 버튼
-        $('.call-btn').click(function () {
-          location.href = 'tel:0517117755'; // 실제 전화번호로 교체 필요
-        });
+          // 안내전화 버튼
+          $(".call-btn").click(function () {
+            location.href = "tel:0517117755"; // 실제 전화번호로 교체 필요
+          });
 
-        // 전화 버튼
-        $('.call-action').click(function () {
-          const tel = $(this).data('tel');
-          location.href = `tel:${tel}`;
-        });
+          // 전화 버튼
+          $(".call-action").click(function () {
+            const tel = $(this).data("tel");
+            location.href = `tel:${tel}`;
+          });
 
-        // 문자 버튼
-        $('.sms-action').click(function () {
-          const tel = $(this).data('tel');
-          location.href = `sms:${tel}`;
-        });
+          // 문자 버튼
+          $(".sms-action").click(function () {
+            const tel = $(this).data("tel");
+            location.href = `sms:${tel}`;
+          });
 
-        // 모달 외부 클릭 시 닫기
-        $('.modal').click(function (e) {
-          if ($(e.target).hasClass('modal')) {
-            $(this).fadeOut(300);
-          }
-        });
-      }
+          // 모달 외부 클릭 시 닫기
+          $(".modal").click(function (e) {
+            if ($(e.target).hasClass("modal")) {
+              $(this).fadeOut(300);
+            }
+          });
+        }
 
-      // 아코디언 초기화 함수
-      function initAccordions() {
-        $('.accordion-header').click(function () {
-          const target = $(this).data('target');
-          const content = $(`#${target}`);
-          const icon = $(this).find('.accordion-icon');
+        // 아코디언 초기화 함수
+        function initAccordions() {
+          $(".accordion-header").click(function () {
+            const target = $(this).data("target");
+            const content = $(`#${target}`);
+            const icon = $(this).find(".accordion-icon");
 
-          // 열림/닫힘 상태 토글
-          if (content.css('max-height') === '0px' || content.css('max-height') === 'none') {
-            // 모든 아코디언 닫기
-            $('.accordion-content').css('max-height', '0');
-            $('.accordion-icon').css('transform', 'rotate(0deg)');
+            // 열림/닫힘 상태 토글
+            if (
+              content.css("max-height") === "0px" ||
+              content.css("max-height") === "none"
+            ) {
+              // 모든 아코디언 닫기
+              $(".accordion-content").css("max-height", "0");
+              $(".accordion-icon").css("transform", "rotate(0deg)");
 
-            // 선택한 아코디언 열기
-            content.css('max-height', content[0].scrollHeight + 'px');
-            icon.css('transform', 'rotate(180deg)');
-          } else {
-            // 선택한 아코디언 닫기
-            content.css('max-height', '0');
-            icon.css('transform', 'rotate(0deg)');
-          }
-        });
-      }
+              // 선택한 아코디언 열기
+              content.css("max-height", content[0].scrollHeight + "px");
+              icon.css("transform", "rotate(180deg)");
+            } else {
+              // 선택한 아코디언 닫기
+              content.css("max-height", "0");
+              icon.css("transform", "rotate(0deg)");
+            }
+          });
+        }
 
-      // 토스트 메시지 표시 함수
-      function showToast(message) {
-        const toast = $('#toast');
-        toast.text(message);
-        toast.addClass('show');
+        // 토스트 메시지 표시 함수
+        function showToast(message) {
+          const toast = $("#toast");
+          toast.text(message);
+          toast.addClass("show");
 
-        // 3초 후 토스트 숨기기
-        setTimeout(() => {
-          toast.removeClass('show');
-        }, 3000);
-      }
+          // 3초 후 토스트 숨기기
+          setTimeout(() => {
+            toast.removeClass("show");
+          }, 3000);
+        }
 
+        //bgm
+        document.addEventListener("DOMContentLoaded", function () {
+          var audio = document.getElementById("bg-music");
+          var audioBtn = document.getElementById("audio-btn");
+          var audioIcon = document.getElementById("audio-icon");
+          var entrance = document.getElementById("entrance");
+          var entranceBtn = document.getElementById("entrance-btn");
+          var musicNotification = document.getElementById("music-notification");
 
+          // 방법 1: 입장 버튼 클릭 시 음악 재생
+          entranceBtn.addEventListener("mousedown", function () {
+            entrance.style.display = "none";
 
-      //bgm
-         document.addEventListener("DOMContentLoaded", function () {
-            var audio = document.getElementById("bg-music");
-            var audioBtn = document.getElementById("audio-btn");
-            var audioIcon = document.getElementById("audio-icon");
-            var entrance = document.getElementById("entrance");
-            var entranceBtn = document.getElementById("entrance-btn");
-            var musicNotification = document.getElementById("music-notification");
-
-            // 방법 1: 입장 버튼 클릭 시 음악 재생
-            entranceBtn.addEventListener("mousedown", function () {
-              entrance.style.display = "none";
-
-              // 음악 재생 시도
-              audio.play().then(() => {
+            // 음악 재생 시도
+            audio
+              .play()
+              .then(() => {
                 audioIcon.src = "./images/pause_btn.svg"; // 정지 아이콘으로 변경
-              }).catch(() => {
+              })
+              .catch(() => {
                 console.log("사용자 상호작용 후에도 자동 재생 실패");
 
                 // 방법 2: 음소거로 자동 재생 시도
@@ -1677,101 +1785,97 @@
                   }, 5000);
                 });
               });
-            });
-
-            // 음악 버튼 클릭 시 재생/정지 전환
-            audioBtn.addEventListener("click", function () {
-              if (audio.paused) {
-                audio.muted = false; // 음소거 해제
-                audio.play();
-                audioIcon.src = "./images/pause_btn.svg"; // 정지 아이콘
-              } else {
-                audio.pause();
-                audioIcon.src = "./images/start_btn.svg"; // 재생 아이콘
-              }
-            });
           });
 
+          // 음악 버튼 클릭 시 재생/정지 전환
+          audioBtn.addEventListener("click", function () {
+            if (audio.paused) {
+              audio.muted = false; // 음소거 해제
+              audio.play();
+              audioIcon.src = "./images/pause_btn.svg"; // 정지 아이콘
+            } else {
+              audio.pause();
+              audioIcon.src = "./images/start_btn.svg"; // 재생 아이콘
+            }
+          });
+        });
 
-//꽃잎
-      document.addEventListener('DOMContentLoaded', function () {
-        const petalsContainer = document.querySelector('.petals-container');
-        const numPetals = 40; // 꽃잎 개수
+        //꽃잎
+        document.addEventListener("DOMContentLoaded", function () {
+          const petalsContainer = document.querySelector(".petals-container");
+          const numPetals = 40; // 꽃잎 개수
 
-        // 꽃잎 생성 함수
-        function createPetals() {
-          for (let i = 0; i < numPetals; i++) {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
+          // 꽃잎 생성 함수
+          function createPetals() {
+            for (let i = 0; i < numPetals; i++) {
+              const petal = document.createElement("div");
+              petal.classList.add("petal");
 
-            // 랜덤 크기 (15px ~ 30px)
-            // const size = Math.floor(Math.random() * 15) + 15;
-            const size = Math.floor(Math.random() * 4) + 7;
-            petal.style.width = `${size}px`;
-            petal.style.height = `${size}px`;
+              // 랜덤 크기 (15px ~ 30px)
+              // const size = Math.floor(Math.random() * 15) + 15;
+              const size = Math.floor(Math.random() * 4) + 7;
+              petal.style.width = `${size}px`;
+              petal.style.height = `${size}px`;
 
-            // 랜덤 초기 위치
-            const startPositionX = Math.random() * 100;
-            petal.style.left = `${startPositionX}%`;
+              // 랜덤 초기 위치
+              const startPositionX = Math.random() * 100;
+              petal.style.left = `${startPositionX}%`;
 
-            // 랜덤 속도 (10초 ~ 25초)
-            const duration = Math.random() * 15 + 10;
-            petal.style.animationDuration = `${duration}s`;
+              // 랜덤 속도 (10초 ~ 25초)
+              const duration = Math.random() * 15 + 10;
+              petal.style.animationDuration = `${duration}s`;
 
-            // 랜덤 지연 시간 (0초 ~ 10초)
-            const delay = Math.random() * 10;
-            petal.style.animationDelay = `${delay}s`;
+              // 랜덤 지연 시간 (0초 ~ 10초)
+              const delay = Math.random() * 10;
+              petal.style.animationDelay = `${delay}s`;
 
-            // 랜덤 이동 및 회전 값 설정
-            const randomX = Math.random() * 200 - 100; // -100 ~ 100
-            const randomRotate = Math.random() * 360; // 0 ~ 360
-            petal.style.setProperty('--random-x', randomX);
-            petal.style.setProperty('--random-rotate', randomRotate);
+              // 랜덤 이동 및 회전 값 설정
+              const randomX = Math.random() * 200 - 100; // -100 ~ 100
+              const randomRotate = Math.random() * 360; // 0 ~ 360
+              petal.style.setProperty("--random-x", randomX);
+              petal.style.setProperty("--random-rotate", randomRotate);
 
-            petalsContainer.appendChild(petal);
+              petalsContainer.appendChild(petal);
+            }
           }
-        }
 
-        // 꽃잎 생성 호출
-        createPetals();
-      });
+          // 꽃잎 생성 호출
+          createPetals();
+        });
 
-
-      //네이버 지도
-      var mapOptions = {
+        //네이버 지도
+        var mapOptions = {
           center: new naver.maps.LatLng(35.836898, 128.533318),
-          zoom: 15
+          zoom: 15,
         };
 
-        var map = new naver.maps.Map('map', mapOptions);
+        var map = new naver.maps.Map("map", mapOptions);
 
         var marker = new naver.maps.Marker({
           position: new naver.maps.LatLng(35.836898, 128.533318),
-          map: map
+          map: map,
         });
 
         var infoWindow = new naver.maps.InfoWindow({
-          content: '<div style="padding:5px;font-size:14px;color:#333;">파라다이스웨딩컨벤션</div>'
+          content:
+            '<div style="padding:5px;font-size:14px;color:#333;">파라다이스웨딩컨벤션</div>',
         });
 
         infoWindow.open(map, marker);
-      // var listener = naver.maps.Event.addListener(map, 'click', function (e) {
-      //   console.log( e.coord);
-      //     var marker = new naver.maps.Marker({
-      //       position: e.coord,
-      //       map: map
-      //     });
-      //   });
+        // var listener = naver.maps.Event.addListener(map, 'click', function (e) {
+        //   console.log( e.coord);
+        //     var marker = new naver.maps.Marker({
+        //       position: e.coord,
+        //       map: map
+        //     });
+        //   });
 
-
-      
-      // $(function(){
-      //   setTimeout(() => {
-      //     $("#audio-icon").trigger("click");  
-      //   }, 1000);
-      // });
-    </script>
-  </div>
-</body>
-
+        // $(function(){
+        //   setTimeout(() => {
+        //     $("#audio-icon").trigger("click");
+        //   }, 1000);
+        // });
+      </script>
+    </div>
+  </body>
 </html>
