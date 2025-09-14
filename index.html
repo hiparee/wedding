@@ -1462,16 +1462,14 @@
             "./images/02.jpg",
             "./images/03.jpg",
             "./images/04.jpg",
-            
 
             "./images/08.jpg",
             "./images/09.jpg",
-           
 
             // "./images/16.jpg",
             "./images/17.jpg",
             "./images/05.jpg",
-             "./images/10.jpg",
+            "./images/10.jpg",
             "./images/11.jpg",
             "./images/18.jpg",
             "./images/19.jpg",
@@ -1641,16 +1639,17 @@
             $("#gallery-modal").fadeOut(300);
           });
 
-          // 링크 복사 버튼
+          // 캐시날려
           $("#copy-link").click(function () {
-            const link = window.location.href;
+            const baseUrl = window.location.href.split("?")[0]; // 기존 파라미터 제거
+            const versionedUrl = `${baseUrl}?v=${Date.now()}`; // 현재 시간을 버전으로 추가
+
             navigator.clipboard
-              .writeText(link)
+              .writeText(versionedUrl)
               .then(() => showToast("링크가 복사되었습니다"))
               .catch(() => {
-                // 클립보드 API를 지원하지 않는 경우 대체 방법
                 const tempInput = document.createElement("input");
-                tempInput.value = link;
+                tempInput.value = versionedUrl;
                 document.body.appendChild(tempInput);
                 tempInput.select();
                 document.execCommand("copy");
